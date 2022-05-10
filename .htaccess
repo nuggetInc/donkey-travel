@@ -1,6 +1,6 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteBase /Fietsverhuur-de-Elstar/
+    RewriteBase /donkey-travel/
 
     RewriteRule \.css$ - [L]
 
