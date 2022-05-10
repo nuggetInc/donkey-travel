@@ -13,8 +13,23 @@ declare(strict_types=1);
 <body>
     <?php
 
+    // This uses the url to get the page the user wants to be on
     $page = substr(trim($_SERVER["REDIRECT_URL"], "/"), strlen("/donkey-pages/"));
-    require("pages/{$page}.php");
+    if ($page === "")
+    {
+        // Redirect to login page if no page is selected
+        require("pages/inloggen.php");
+    }
+    else if (file_exists("pages/{$page}.php"))
+    {
+        // Open the page if it exists
+        require("pages/{$page}.php");
+    }
+    else
+    {
+        // Show 404 if page doesn't exist
+        require("pages/404.php");
+    }
 
     ?>
 </body>
