@@ -15,7 +15,7 @@ require_once("environment.php");
 <body>
     <?php
 
-    $page = substr($_SERVER["REDIRECT_URL"], strlen(ROOT_DIR) + 1);
+    $page = substr(trim($_SERVER["REDIRECT_URL"], "/"), strlen(ROOT_DIR));
     require("pages/{$page}.php");
 
     ?>
