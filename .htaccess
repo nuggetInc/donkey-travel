@@ -1,0 +1,8 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /Fietsverhuur-de-Elstar/
+
+    RewriteRule \.css$ - [L]
+
+    RewriteRule ^ index.php [L]
+</IfModule>
