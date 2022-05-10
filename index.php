@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-require_once("environment.php");
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -15,7 +13,7 @@ require_once("environment.php");
 <body>
     <?php
 
-    $page = substr(trim($_SERVER["REDIRECT_URL"], "/"), strlen(ROOT_DIR));
+    $page = substr(trim($_SERVER["REDIRECT_URL"], "/"), strlen("/donkey-pages/"));
     require("pages/{$page}.php");
 
     ?>
