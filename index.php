@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 
+require_once("classes/Customer.php");
+session_start();
+
 const ROOT_DIR = "/donkey-travel/";
 
 /** Get PDO instance */
