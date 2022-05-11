@@ -2,6 +2,14 @@
 
 declare(strict_types=1);
 
+/** Get PDO instance */
+function getPDO(): PDO
+{
+    static $pdo = new PDO("mysql:host=localhost;dbname=donkey_travel", "root", "");
+
+    return $pdo;
+}
+
 ?>
 <!DOCTYPE html>
 <html>
