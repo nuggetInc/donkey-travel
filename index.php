@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+const ROOT = "/donkey-travel/";
+
 /** Get PDO instance */
 function getPDO(): PDO
 {
@@ -22,7 +24,7 @@ function getPDO(): PDO
     <?php
 
     // This uses the url to get the page the user wants to be on
-    $page = substr(trim($_SERVER["REDIRECT_URL"], "/"), strlen("/donkey-pages/"));
+    $page = trim(substr($_SERVER["REDIRECT_URL"], strlen("/donkey-travel/")), "/");
     if ($page === "")
     {
         // Redirect to login page if no page is selected
