@@ -26,17 +26,25 @@ function getPDO(): PDO
 <body>
     <?php
 
-    // This uses the url to get the page the user wants to be on
     $page = trim(substr($_SERVER["REDIRECT_URL"], strlen(ROOT_DIR)), "/");
-    if ($page === "")
+    $path = explode("/", $page);
+
+    // This uses the path to get the page the user wants to be on
+    if (empty($path[0]))
     {
-        // Redirect to login page if no page is selected
-        require("pages/inloggen.php");
+        if (isset($_SESSION["user"]))
+        {
+            require("pages/boekingen.php");
+        }
+        else
+        {
+            require("pages/inloggen.php");
+        }
     }
     else if (file_exists("pages/{$page}.php"))
     {
         // Open the page if it exists
-        require("pages/{$page}.php");
+        require("pages/{$path[0]}.php");
     }
     else
     {
