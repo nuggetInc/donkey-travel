@@ -30,7 +30,6 @@ $user = $_SESSION["user"];
 
 switch ($path[1] ?? null)
 {
-    case "overzicht":
     case "aanvragen":
     case "wijzigen":
     case "verwijderen":

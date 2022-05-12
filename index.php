@@ -20,6 +20,7 @@ function getPDO(): PDO
 <html>
 
 <head>
+    <link rel="stylesheet" href="<?= ROOT_DIR ?>css/style.css">
     <title>Donkey Travel</title>
 </head>
 
@@ -31,8 +32,8 @@ function getPDO(): PDO
 
     switch ($path[0])
     {
-        case "inloggen":
         case "registreren":
+        case "uitloggen":
             require("pages/{$path[0]}.php");
             break;
         case "boekingen":
@@ -43,7 +44,10 @@ function getPDO(): PDO
                 break;
             }
         default:
-            require("pages/inloggen.php");
+            if (isset($_SESSION["user"]))
+                require("pages/boekingen.php");
+            else
+                require("pages/inloggen.php");
             break;
     }
 
