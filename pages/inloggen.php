@@ -46,10 +46,8 @@ $password = htmlspecialchars($_SESSION["login-password"] ?? "");
     <button type="submit" name="login">Inloggen</button>
 </form>
 
-<form action="<?= ROOT_DIR . "registreren" ?>">
-    <h2>Nog geen account?</h2>
-    <button type="submit">Maak er hier eentje aan!</button>
-</form>
+<h2>Nog geen account?</h2>
+<a href="<?= ROOT_DIR . "registreren" ?>">Maak er hier eentje aan!</a>
 
 <?php
 
