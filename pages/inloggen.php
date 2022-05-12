@@ -14,8 +14,8 @@ if (isset($_POST["login"]))
         {
             $_SESSION["user"] = $customer;
 
-            header("Location: " . ROOT_DIR);
-            exit;
+            // header("Location: " . ROOT_DIR);
+            // exit;
         }
     }
 
@@ -24,9 +24,12 @@ if (isset($_POST["login"]))
     $_SESSION["login-email"] = $email;
     $_SESSION["login-password"] = $password;
 
-    header("Location: " . ROOT_DIR . "inloggen");
-    exit;
+    // header("Location: " . ROOT_DIR);
+    // exit;
 }
+
+
+echo password_hash($_SESSION["login-password"], PASSWORD_DEFAULT);
 
 $email = htmlspecialchars($_SESSION["login-email"] ?? "");
 $password = htmlspecialchars($_SESSION["login-password"] ?? "");
