@@ -40,14 +40,21 @@ function getPDO(): PDO
         case "account":
             if (isset($_SESSION["user"]))
             {
+                require("header.php");
                 require("pages/{$path[0]}.php");
                 break;
             }
         default:
             if (isset($_SESSION["user"]))
+            {
+                require("header.php");
                 require("pages/boekingen.php");
+            }
             else
+            {
                 require("pages/inloggen.php");
+            }
+
             break;
     }
 

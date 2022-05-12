@@ -20,6 +20,21 @@ class Customer
         $this->password = $password;
     }
 
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function getPhonenumber(): string
+    {
+        return $this->phonenumber;
+    }
+
     public function getPassword(): string
     {
         return $this->password;
