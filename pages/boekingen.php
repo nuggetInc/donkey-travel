@@ -2,33 +2,45 @@
 
 declare(strict_types=1);
 
-if (!isset($_SESSION["user"]))
-{
-    header("Location: " . ROOT_DIR . "inloggen");
-    exit;
-}
+$user = $_SESSION["user"];
 
 ?>
-<header>
-    <ul>
-        <li><a href="<?= ROOT_DIR ?>boekingen/overzicht">overzicht</a></li>
-        <li><a href="<?= ROOT_DIR ?>boekingen/aanvragen">aanvragen</a></li>
-        <li><a href="<?= ROOT_DIR ?>boekingen/wijzigen">wijzigen</a></li>
-        <li><a href="<?= ROOT_DIR ?>boekingen/verwijderen">verwijderen</a></li>
-        <li><a href="<?= ROOT_DIR ?>boekingen/activeren">(de)activeren</a></li>
-        <li><a href="<?= ROOT_DIR ?>boekingen/route">route</a></li>
-    </ul>
-</header>
+<table>
+    <tbody>
+        <tr>
+            <td>
+                <h1>Mijn Donkey Travel</h1>
+            </td>
+            <td>Ingelogd als</td>
+            <td>
+                <?= $user->getName() ?><br />
+                <?= $user->getEmail() ?><br />
+                <?= $user->getPhonenumber() ?>
+            </td>
+            <td><button>Uitloggen</button></td>
+        </tr>
+    </tbody>
+</table>
+<ul>
+    <li><a href="<?= ROOT_DIR ?>boekingen">Boekingen</a></li>
+    <li><a href="<?= ROOT_DIR ?>account">Account</a></li>
+</ul>
+<hr>
 <?php
 
-// This uses the url to get the page the user wants to be on
-if (empty($path[1]))
+switch ($path[1] ?? null)
 {
-    require("pages/boekingen/overzicht.php");
-}
-else
-{
-    require("pages/{$page}.php");
+    case "overzicht":
+    case "aanvragen":
+    case "wijzigen":
+    case "verwijderen":
+    case "activeren":
+    case "route":
+        require("pages/boekingen/{$path[1]}.php");
+        break;
+    default:
+        require("pages/boekingen/overzicht.php");
+        break;
 }
 
 ?>
