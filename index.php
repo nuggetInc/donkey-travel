@@ -3,6 +3,9 @@
 declare(strict_types=1);
 
 require_once("classes/Customer.php");
+require_once("classes/Reservation.php");
+require_once("classes/Status.php");
+require_once("classes/Trip.php");
 session_start();
 
 const ROOT_DIR = "/donkey-travel/";

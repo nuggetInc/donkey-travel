@@ -20,6 +20,11 @@ class Customer
         $this->password = $password;
     }
 
+    public function getID(): int
+    {
+        return $this->id;
+    }
+
     public function getName(): string
     {
         return $this->name;
