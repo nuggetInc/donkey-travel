@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-$user = $_SESSION["user"];
+$customer = $_SESSION["customer"];
 
 ?>
 <table>
@@ -13,9 +13,9 @@ $user = $_SESSION["user"];
             </td>
             <td>Ingelogd als</td>
             <td>
-                <?= $user->getName() ?><br />
-                <?= $user->getEmail() ?><br />
-                <?= $user->getPhonenumber() ?>
+                <?= $customer->getName() ?><br />
+                <?= $customer->getEmail() ?><br />
+                <?= $customer->getPhonenumber() ?>
             </td>
             <td>
                 <a href="<?= ROOT_DIR ?>uitloggen">Uitloggen</button></form>
