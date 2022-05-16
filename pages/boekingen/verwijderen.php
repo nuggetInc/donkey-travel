@@ -32,6 +32,6 @@ $trips = Trip::getAll();
 
     <input type="submit" name="delete" value="Verwijderen" />
 </form>
-<form action="<?= ROOT_DIR ?>boekingen">
+<form action="<?= ROOT_DIR ?>boekingen" method="POST">
     <button type="submit">Annuleren</button>
 </form>

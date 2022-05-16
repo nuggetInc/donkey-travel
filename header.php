@@ -16,7 +16,7 @@ declare(strict_types=1);
                 <?= $_SESSION["customer"]->getPhonenumber() ?>
             </td>
             <td>
-                <form action="<?= ROOT_DIR ?>uitloggen">
+                <form action="<?= ROOT_DIR ?>uitloggen" method="POST">
                     <button type="submit">Uitloggen</button>
                 </form>
             </td>
@@ -25,12 +25,12 @@ declare(strict_types=1);
 </table>
 <ul>
     <li>
-        <form action="<?= ROOT_DIR ?>boekingen">
+        <form action="<?= ROOT_DIR ?>boekingen" method="POST">
             <button type="submit">Boekingen</button>
         </form>
     </li>
     <li>
-        <form action="<?= ROOT_DIR ?>account">
+        <form action="<?= ROOT_DIR ?>account" method="POST">
             <button type="submit">Account</button>
         </form>
     </li>
