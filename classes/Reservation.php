@@ -80,6 +80,13 @@ class Reservation
         $sth->execute($params);
     }
 
+    public function delete()
+    {
+        $params = array(":id" => $this->id);
+        $sth = getPDO()->prepare("DELETE FROM `reservations` WHERE `id` = :id;");
+        $sth->execute($params);
+    }
+
     public static function get(int $id): ?Reservation
     {
         $params = array(":id" => $id);
