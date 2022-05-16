@@ -18,13 +18,23 @@ $customer = $_SESSION["customer"];
                 <?= $customer->getPhonenumber() ?>
             </td>
             <td>
-                <a href="<?= ROOT_DIR ?>uitloggen">Uitloggen</button></form>
+                <form action="<?= ROOT_DIR ?>uitloggen">
+                    <button type="submit">Uitloggen</button>
+                </form>
             </td>
         </tr>
     </tbody>
 </table>
 <ul>
-    <li><a href="<?= ROOT_DIR ?>boekingen">Boekingen</a></li>
-    <li><a href="<?= ROOT_DIR ?>account">Account</a></li>
+    <li>
+        <form action="<?= ROOT_DIR ?>boekingen">
+            <button type="submit">Boekingen</button>
+        </form>
+    </li>
+    <li>
+        <form action="<?= ROOT_DIR ?>account">
+            <button type="submit">Account</button>
+        </form>
+    </li>
 </ul>
 <hr>

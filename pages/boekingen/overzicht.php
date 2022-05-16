@@ -14,7 +14,11 @@ $reservations = Reservation::byCustomer($_SESSION["customer"])
             <th>PIN Code</th>
             <th>Tocht</th>
             <th>status</th>
-            <th><a href="<?= ROOT_DIR ?>boekingen/aanvragen">+</a></th>
+            <th>
+                <form action="<?= ROOT_DIR ?>boekingen/aanpassen">
+                    <button type="submit">+</button>
+                </form>
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -24,7 +28,16 @@ $reservations = Reservation::byCustomer($_SESSION["customer"])
             <td><?= $reservation->getPincode() ?></td>
             <td><?= $reservation->getTrip()->getRoute() ?></td>
             <td><?= $reservation->getStatus()->getStatus() ?></td>
-            <td><a href="<?= ROOT_DIR ?>boekingen/wijzigen">...</a> <a href="<?= ROOT_DIR ?>boekingen/verwijderen">X</a></td>
+            <td>
+                <form action="<?= ROOT_DIR ?>boekingen/wijzigen" method="POST">
+                    <input type="hidden" value="<?= $id ?>" />
+                    <button type="submit">...</button>
+                </form>
+                <form action="<?= ROOT_DIR ?>boekingen/verwijderen" method="POST">
+                    <input type="hidden" value="<?= $id ?>" />
+                    <button type="submit">X</button>
+                </form>
+            </td>
         <?php endforeach ?>
     </tbody>
 </table>
