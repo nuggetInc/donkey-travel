@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-$customer = $_SESSION["customer"];
-
 ?>
 <table>
     <tbody>
@@ -13,9 +11,9 @@ $customer = $_SESSION["customer"];
             </td>
             <td>Ingelogd als</td>
             <td>
-                <?= $customer->getName() ?><br />
-                <?= $customer->getEmail() ?><br />
-                <?= $customer->getPhonenumber() ?>
+                <?= $_SESSION["customer"]->getName() ?><br />
+                <?= $_SESSION["customer"]->getEmail() ?><br />
+                <?= $_SESSION["customer"]->getPhonenumber() ?>
             </td>
             <td>
                 <form action="<?= ROOT_DIR ?>uitloggen">
