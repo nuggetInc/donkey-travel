@@ -19,9 +19,26 @@ class Status
         $this->assignPIN = $assignPIN;
     }
 
+    public function GetID(): int
+    {
+        return $this->id;
+    }
+
     public function getStatus(): string
     {
         return $this->status;
+    }
+
+    public static function get(int $id): ?Status
+    {
+        $params = array(":id" => $id);
+        $sth = getPDO()->prepare("SELECT `id`, `statuscode`, `status`, `removeable`, `assign_pin` FROM `statuses` WHERE `id` = :id LIMIT 1;");
+        $sth->execute($params);
+
+        if ($row = $sth->fetch())
+            return new Status($id, $row["statuscode"], $row["status"], $row["removeable"], $row["assign_pin"]);
+
+        return null;
     }
 
     public static function getAll(): array

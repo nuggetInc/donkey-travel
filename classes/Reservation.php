@@ -42,9 +42,54 @@ class Reservation
         return $this->trip;
     }
 
+    public function getCustomer(): Customer
+    {
+        return $this->customer;
+    }
+
     public function getStatus(): Status
     {
         return $this->status;
+    }
+
+    public function update(int $startDate, int $pincode, Trip $trip, Customer $customer, Status $status)
+    {
+        $this->startDate = $startDate;
+        $this->pincode = $pincode;
+        $this->trip = $trip;
+        $this->customer = $customer;
+        $this->status = $status;
+
+        $params = array(
+            ":id" => $this->id,
+            ":startDate" => date("Y-m-d", $startDate),
+            ":pincode" => $pincode,
+            ":trip_id" => $trip->getID(),
+            ":customer_id" => $customer->getID(),
+            ":status_id" => $status->getID()
+        );
+        $sth = getPDO()->prepare(
+            "UPDATE `reservations`
+            SET `start_date` = :startDate,
+                `pincode` = :pincode,
+                `trip_id` = :trip_id,
+                `customer_id` = :customer_id,
+                `status_id` = :status_id
+            WHERE `id` = :id;"
+        );
+        $sth->execute($params);
+    }
+
+    public static function get(int $id): ?Reservation
+    {
+        $params = array(":id" => $id);
+        $sth = getPDO()->prepare("SELECT `start_date`, `pincode`, `trip_id`, `customer_id`, `status_id` FROM `reservations` WHERE `id` = :id LIMIT 1;");
+        $sth->execute($params);
+
+        if ($row = $sth->fetch())
+            return new Reservation($id, strtotime($row["start_date"]), $row["pincode"], Trip::get($row["trip_id"]), Customer::get($row["customer_id"]), Status::get($row["status_id"]));
+
+        return null;
     }
 
     /** Gets all the reservations from a customer
@@ -63,9 +108,7 @@ class Reservation
         $reservations = array();
 
         while ($row = $sth->fetch())
-        {
             $reservations[$row["id"]] = new Reservation($row["id"], strtotime($row["start_date"]), $row["pincode"], $trips[$row["trip_id"]], $customer, $statuses[$row["status_id"]]);
-        }
 
         return $reservations;
     }

@@ -45,6 +45,18 @@ class Customer
         return $this->password;
     }
 
+    public static function get(int $id): ?Customer
+    {
+        $params = array(":id" => $id);
+        $sth = getPDO()->prepare("SELECT `id`, `name`, `email`, `phonenumber`, `password` FROM `customers` WHERE `id` = :id LIMIT 1;");
+        $sth->execute($params);
+
+        if ($row = $sth->fetch())
+            return new Customer($id, $row["name"], $row["email"], $row["phonenumber"], $row["password"]);
+
+        return null;
+    }
+
     /** Get a customer by email
      * 
      * @param string $email The email of the customer to get
@@ -58,7 +70,7 @@ class Customer
         $sth->execute($params);
 
         if ($row = $sth->fetch())
-            return new Customer((int)$row["id"], $row["name"], $email, $row["phonenumber"], $row["password"]);
+            return new Customer($row["id"], $row["name"], $email, $row["phonenumber"], $row["password"]);
 
         return null;
     }
