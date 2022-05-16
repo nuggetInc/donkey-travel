@@ -2,6 +2,20 @@
 
 declare(strict_types=1);
 
+if (!isset($_GET["id"]))
+{
+    header("Location: " . ROOT_DIR . "boekingen");
+    exit;
+}
+
+$reservation = Reservation::get((int)$_GET["id"]);
+
+if (!isset($reservation) || $reservation->getCustomer()->getID() !== $_SESSION["customer"]->getID())
+{
+    header("Location: " . ROOT_DIR . "boekingen");
+    exit;
+}
+
 if (isset($_POST["delete"]))
 {
     Reservation::get((int)$_GET["id"])->delete();
@@ -9,9 +23,6 @@ if (isset($_POST["delete"]))
     header("Location: " . ROOT_DIR . "boekingen");
     exit;
 }
-
-$reservation = Reservation::get((int)$_GET["id"]);
-$trips = Trip::getAll();
 
 ?>
 <h2>Boekingen verwijderen</h2>
