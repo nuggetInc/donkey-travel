@@ -57,6 +57,26 @@ class Customer
         return null;
     }
 
+    public static function update(int $id, string $name, string $email, string $phonenumber, string $password)
+    {
+        $params = array(
+            ":id" => $id,
+            ":name" => $name,
+            ":email" => $email,
+            ":phonenumber" => $phonenumber,
+            ":password" => $password
+        );
+        $sth = getPDO()->prepare(
+            "UPDATE `customers`
+            SET `name` = :name,
+                `email` = :email,
+                `phonenumber` = :phonenumber,
+                `password` = :password
+            WHERE `id` = :id;"
+        );
+        $sth->execute($params);
+    }
+
     /** Get a customer by email
      * 
      * @param string $email The email of the customer to get

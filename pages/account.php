@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 switch ($path[1] ?? null)
 {
     case "wijzigen":
