@@ -50,6 +50,4 @@ $trips = Trip::getAll();
 
     <input type="submit" name="edit" value="Wijzigen" />
 </form>
-<form action="<?= ROOT_DIR ?>boekingen" method="POST">
-    <button type="submit">Annuleren</button>
-</form>
+<a href="<?= ROOT_DIR ?>boekingen">Annuleren</a>

@@ -15,9 +15,7 @@ $reservations = Reservation::byCustomerID($_SESSION["customerID"])
             <th>Tocht</th>
             <th>status</th>
             <th>
-                <form action="<?= ROOT_DIR ?>boekingen/aanvragen" method="POST">
-                    <button type="submit">+</button>
-                </form>
+                <a href="<?= ROOT_DIR ?>boekingen/aanvragen">+</a>
             </th>
         </tr>
     </thead>
@@ -29,14 +27,8 @@ $reservations = Reservation::byCustomerID($_SESSION["customerID"])
             <td><?= $reservation->getTrip()->getRoute() ?></td>
             <td><?= $reservation->getStatus()->getStatus() ?></td>
             <td>
-                <form action="<?= ROOT_DIR ?>boekingen/wijzigen" method="GET">
-                    <input type="hidden" name="id" value="<?= $id ?>" />
-                    <button type="submit">...</button>
-                </form>
-                <form action="<?= ROOT_DIR ?>boekingen/verwijderen" method="GET">
-                    <input type="hidden" name="id" value="<?= $id ?>" />
-                    <button type="submit">X</button>
-                </form>
+                <a href="<?= ROOT_DIR ?>boekingen/wijzigen">...</a>
+                <a href="<?= ROOT_DIR ?>boekingen/verwijderen">X</a>
             </td>
         <?php endforeach ?>
     </tbody>

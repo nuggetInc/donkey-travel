@@ -44,6 +44,4 @@ if (isset($_POST["edit"]))
 
     <input type="submit" name="edit" value="Bewaren" />
 </form>
-<form action="<?= ROOT_DIR ?>" method="POST">
-    <button type="submit">Annuleren</button>
-</form>
+<a href="<?= ROOT_DIR ?>">Annuleren</a>

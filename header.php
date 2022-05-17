@@ -18,23 +18,17 @@ $customer = Customer::get($_SESSION["customerID"]);
                 <?= $customer->getPhonenumber() ?>
             </td>
             <td>
-                <form action="<?= ROOT_DIR ?>uitloggen" method="POST">
-                    <button type="submit">Uitloggen</button>
-                </form>
+                <a href="<?= ROOT_DIR ?>uitloggen">Uitloggen</a>
             </td>
         </tr>
     </tbody>
 </table>
 <ul>
     <li>
-        <form action="<?= ROOT_DIR ?>boekingen" method="POST">
-            <button type="submit">Boekingen</button>
-        </form>
+        <a href="<?= ROOT_DIR ?>boekingen">Boekingen</a>
     </li>
     <li>
-        <form action="<?= ROOT_DIR ?>account" method="POST">
-            <button type="submit">Account</button>
-        </form>
+        <a href="<?= ROOT_DIR ?>account">Account</a>
     </li>
 </ul>
 <hr>
