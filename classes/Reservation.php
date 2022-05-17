@@ -67,16 +67,10 @@ class Reservation
         return Status::get($this->status);
     }
 
-    public function update(int $startDate, int $pincode, int $tripID, int $customerID, int $statusID)
+    public static function update(int $id, int $startDate, int $pincode, int $tripID, int $customerID, int $statusID)
     {
-        $this->startDate = $startDate;
-        $this->pincode = $pincode;
-        $this->tripID = $tripID;
-        $this->customerID = $customerID;
-        $this->statusID = $statusID;
-
         $params = array(
-            ":id" => $this->id,
+            ":id" => $id,
             ":startDate" => date("Y-m-d", $startDate),
             ":pincode" => $pincode,
             ":tripID" => $tripID,
