@@ -10,7 +10,7 @@ if (!isset($_GET["id"]))
 
 $reservation = Reservation::get((int)$_GET["id"]);
 
-if (!isset($reservation) || $reservation->getCustomer()->getID() !== $_SESSION["customer"]->getID())
+if (!isset($reservation) || $reservation->getCustomerID() !== $_SESSION["customerID"])
 {
     header("Location: " . ROOT_DIR . "boekingen");
     exit;
