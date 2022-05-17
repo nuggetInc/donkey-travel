@@ -15,7 +15,7 @@ $reservations = Reservation::byCustomer($_SESSION["customer"])
             <th>Tocht</th>
             <th>status</th>
             <th>
-                <form action="<?= ROOT_DIR ?>boekingen/aanpassen" method="POST">
+                <form action="<?= ROOT_DIR ?>boekingen/aanvragen" method="POST">
                     <button type="submit">+</button>
                 </form>
             </th>
