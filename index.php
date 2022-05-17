@@ -3,6 +3,9 @@
 declare(strict_types=1);
 
 require_once("classes/Customer.php");
+require_once("classes/Reservation.php");
+require_once("classes/Status.php");
+require_once("classes/Trip.php");
 session_start();
 
 const ROOT_DIR = "/donkey-travel/";
@@ -38,14 +41,14 @@ function getPDO(): PDO
             break;
         case "boekingen":
         case "account":
-            if (isset($_SESSION["user"]))
+            if (isset($_SESSION["customer"]))
             {
                 require("header.php");
                 require("pages/{$path[0]}.php");
                 break;
             }
         default:
-            if (isset($_SESSION["user"]))
+            if (isset($_SESSION["customer"]))
             {
                 require("header.php");
                 require("pages/boekingen.php");

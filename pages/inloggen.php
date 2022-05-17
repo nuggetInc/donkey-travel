@@ -12,7 +12,7 @@ if (isset($_POST["login"]))
     {
         if (password_verify($password, $customer->getPassword()))
         {
-            $_SESSION["user"] = $customer;
+            $_SESSION["customer"] = $customer;
 
             header("Location: " . ROOT_DIR);
             exit;
