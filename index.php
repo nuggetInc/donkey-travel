@@ -35,6 +35,7 @@ function getPDO(): PDO
 
     switch ($path[0])
     {
+        case "inloggen":
         case "registreren":
         case "uitloggen":
             require("pages/{$path[0]}.php");

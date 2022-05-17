@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 switch ($path[1] ?? null)
 {
+    case "overzicht":
     case "aanvragen":
     case "wijzigen":
     case "verwijderen":
