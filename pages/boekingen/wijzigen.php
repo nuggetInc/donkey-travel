@@ -18,8 +18,8 @@ if (!isset($reservation) || $reservation->getCustomer()->getID() !== $_SESSION["
 
 if (isset($_POST["edit"]))
 {
-    $reservation = Reservation::get((int)$_GET["id"]);
-    $reservation->update(
+    $reservation = Reservation::update(
+        (int)$_GET["id"],
         strtotime($_POST["date"]),
         $reservation->getPincode(),
         $_POST["tripID"],
