@@ -42,14 +42,14 @@ function getPDO(): PDO
             break;
         case "boekingen":
         case "account":
-            if (isset($_SESSION["customer"]))
+            if (isset($_SESSION["customerID"]))
             {
                 require("header.php");
                 require("pages/{$path[0]}.php");
                 break;
             }
         default:
-            if (isset($_SESSION["customer"]))
+            if (isset($_SESSION["customerID"]))
             {
                 require("header.php");
                 require("pages/boekingen.php");

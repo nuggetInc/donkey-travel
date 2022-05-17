@@ -7,18 +7,18 @@ class Reservation
     private int $id;
     private int $startDate;
     private int $pincode;
-    private Trip $trip;
-    private Customer $customer;
-    private Status $status;
+    private int $tripID;
+    private int $customerID;
+    private int $statusID;
 
-    private function __construct(int $id, int $startDate, int $pincode, Trip $trip, Customer $customer, Status $status)
+    private function __construct(int $id, int $startDate, int $pincode, int $tripID, int $customerID, int $statusID)
     {
         $this->id = $id;
         $this->startDate = $startDate;
         $this->pincode = $pincode;
-        $this->trip = $trip;
-        $this->customer = $customer;
-        $this->status = $status;
+        $this->tripID = $tripID;
+        $this->customerID = $customerID;
+        $this->statusID = $statusID;
     }
 
     public function getStartDate(): int
@@ -37,52 +37,67 @@ class Reservation
         return $this->pincode;
     }
 
+    public function getTripID(): int
+    {
+        return $this->tripID;
+    }
+
+    public function getCustomerID(): int
+    {
+        return $this->customerID;
+    }
+
+    public function getStatusID(): int
+    {
+        return $this->statusID;
+    }
+
     public function getTrip(): Trip
     {
-        return $this->trip;
+        return Trip::get($this->tripID);
     }
 
     public function getCustomer(): Customer
     {
-        return $this->customer;
+        return Customer::get($this->customer);
     }
 
     public function getStatus(): Status
     {
-        return $this->status;
+        return Status::get($this->status);
     }
 
-    public function update(int $startDate, int $pincode, Trip $trip, Customer $customer, Status $status)
+    public function update(int $startDate, int $pincode, int $tripID, int $customerID, int $statusID)
     {
         $this->startDate = $startDate;
         $this->pincode = $pincode;
-        $this->trip = $trip;
-        $this->customer = $customer;
-        $this->status = $status;
+        $this->tripID = $tripID;
+        $this->customerID = $customerID;
+        $this->statusID = $statusID;
 
         $params = array(
             ":id" => $this->id,
             ":startDate" => date("Y-m-d", $startDate),
             ":pincode" => $pincode,
-            ":trip_id" => $trip->getID(),
-            ":customer_id" => $customer->getID(),
-            ":status_id" => $status->getID()
+            ":tripID" => $tripID,
+            ":customerID" => $customerID,
+            ":statusID" => $statusID
         );
         $sth = getPDO()->prepare(
             "UPDATE `reservations`
             SET `start_date` = :startDate,
                 `pincode` = :pincode,
-                `trip_id` = :trip_id,
-                `customer_id` = :customer_id,
-                `status_id` = :status_id
+                `trip_id` = :tripID,
+                `customer_id` = :customerID,
+                `status_id` = :statusID
             WHERE `id` = :id;"
         );
         $sth->execute($params);
     }
 
-    public function delete()
+    public static function delete(int $id)
     {
-        $params = array(":id" => $this->id);
+        $params = array(":id" => $id);
         $sth = getPDO()->prepare("DELETE FROM `reservations` WHERE `id` = :id;");
         $sth->execute($params);
     }
@@ -94,7 +109,7 @@ class Reservation
         $sth->execute($params);
 
         if ($row = $sth->fetch())
-            return new Reservation($id, strtotime($row["start_date"]), $row["pincode"], Trip::get($row["trip_id"]), Customer::get($row["customer_id"]), Status::get($row["status_id"]));
+            return new Reservation($id, strtotime($row["start_date"]), $row["pincode"], $row["trip_id"], $row["customer_id"], $row["status_id"]);
 
         return null;
     }
@@ -103,19 +118,16 @@ class Reservation
      * 
      * @return array all the reservations
      */
-    public static function byCustomer(Customer $customer): array
+    public static function byCustomerID(int $customerID): array
     {
-        $params = array(":customer_id" => $customer->getID());
-        $sth = getPDO()->prepare("SELECT `id`, `start_date`, `pincode`, `trip_id`, `status_id` FROM `reservations` WHERE `customer_id` = :customer_id;");
+        $params = array(":customerID" => $customerID);
+        $sth = getPDO()->prepare("SELECT `id`, `start_date`, `pincode`, `trip_id`, `status_id` FROM `reservations` WHERE `customer_id` = :customerID;");
         $sth->execute($params);
-
-        $trips = Trip::getAll();
-        $statuses = Status::getAll();
 
         $reservations = array();
 
         while ($row = $sth->fetch())
-            $reservations[$row["id"]] = new Reservation($row["id"], strtotime($row["start_date"]), $row["pincode"], $trips[$row["trip_id"]], $customer, $statuses[$row["status_id"]]);
+            $reservations[$row["id"]] = new Reservation($row["id"], strtotime($row["start_date"]), $row["pincode"], $row["trip_id"], $customerID, $row["status_id"]);
 
         return $reservations;
     }

@@ -18,7 +18,7 @@ if (!isset($reservation) || $reservation->getCustomer()->getID() !== $_SESSION["
 
 if (isset($_POST["delete"]))
 {
-    Reservation::get((int)$_GET["id"])->delete();
+    Reservation::delete((int)$_GET["id"]);
 
     header("Location: " . ROOT_DIR . "boekingen");
     exit;

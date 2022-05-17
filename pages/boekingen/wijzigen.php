@@ -22,9 +22,9 @@ if (isset($_POST["edit"]))
     $reservation->update(
         strtotime($_POST["date"]),
         $reservation->getPincode(),
-        Trip::get((int)$_POST["trip"]),
-        $reservation->getCustomer(),
-        $reservation->getStatus()
+        $_POST["tripID"],
+        $reservation->getCustomerID(),
+        $reservation->getStatusID()
     );
 
     header("Location: " . ROOT_DIR . "boekingen");
@@ -41,9 +41,9 @@ $trips = Trip::getAll();
     </label>
 
     <label>Tocht:
-        <select name="trip">
+        <select name="tripID">
             <?php foreach ($trips as $id => $trip) : ?>
-                <option value="<?= $trip->getID() ?>"><?= $trip->getRoute() ?></option>
+                <option value="<?= $id ?>"><?= $trip->getRoute() ?></option>
             <?php endforeach ?>
         </select>
     </label>

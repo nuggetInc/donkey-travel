@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+$customer = Customer::get($_SESSION["customerID"]);
+
 ?>
 <table>
     <tbody>
@@ -11,9 +13,9 @@ declare(strict_types=1);
             </td>
             <td>Ingelogd als</td>
             <td>
-                <?= $_SESSION["customer"]->getName() ?><br />
-                <?= $_SESSION["customer"]->getEmail() ?><br />
-                <?= $_SESSION["customer"]->getPhonenumber() ?>
+                <?= $customer->getName() ?><br />
+                <?= $customer->getEmail() ?><br />
+                <?= $customer->getPhonenumber() ?>
             </td>
             <td>
                 <form action="<?= ROOT_DIR ?>uitloggen" method="POST">

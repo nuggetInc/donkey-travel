@@ -1,6 +1,6 @@
 <?php
 
-unset($_SESSION["customer"]);
+unset($_SESSION["customerID"]);
 
 header("Location: " . ROOT_DIR);
 exit;
