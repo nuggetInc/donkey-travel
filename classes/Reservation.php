@@ -96,6 +96,13 @@ class Reservation
         $sth->execute($params);
     }
 
+    public static function deleteByCustomerID(int $customerID)
+    {
+        $params = array(":customerID" => $customerID);
+        $sth = getPDO()->prepare("DELETE FROM `reservations` WHERE `customer_id` = :customerID;");
+        $sth->execute($params);
+    }
+
     public static function get(int $id): ?Reservation
     {
         $params = array(":id" => $id);

@@ -19,6 +19,8 @@ if (isset($_POST["edit"]))
         $password
     );
 
+    mail($_POST["email"], "Account veranderingen", "Je account op donkeytravel.nl is successvol aangepast.");
+
     header("Location: " . ROOT_DIR . "account");
     exit;
 }
@@ -27,15 +29,15 @@ if (isset($_POST["edit"]))
 <h2>Account wijzigen</h2>
 <form method="POST">
     <label>Naam:
-        <input type="text" name="name" value="<?= htmlspecialchars($customer->getName()) ?>" />
+        <input type="text" name="name" value="<?= htmlspecialchars($customer->getName()) ?>" required />
     </label>
 
     <label>E-mail adres:
-        <input type="email" name="email" value="<?= htmlspecialchars($customer->getEmail()) ?>" />
+        <input type="email" name="email" value="<?= htmlspecialchars($customer->getEmail()) ?>" required />
     </label>
 
     <label>Telefoon:
-        <input type="tel" name="phonenumber" value="<?= htmlspecialchars($customer->getPhonenumber()) ?>" />
+        <input type="tel" name="phonenumber" value="<?= htmlspecialchars($customer->getPhonenumber()) ?>" required />
     </label>
 
     <label>Wachtwoord:
