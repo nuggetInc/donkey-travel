@@ -8,7 +8,7 @@ if (isset($_POST["login"]))
     $email = $_POST["email"];
     $password = $_POST["password"];
 
-    if ($customer = Customer::byEmail($email))
+    if ($customer = Customer::getByEmail($email))
     {
         if (password_verify($password, $customer->getPassword()))
         {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-$reservations = Reservation::byCustomerID($_SESSION["customerID"])
+$reservations = Reservation::getByCustomerID($_SESSION["customerID"])
 
 ?>
 <h2>Boekingen</h2>

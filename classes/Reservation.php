@@ -112,7 +112,7 @@ class Reservation
      * 
      * @return array all the reservations
      */
-    public static function byCustomerID(int $customerID): array
+    public static function getByCustomerID(int $customerID): array
     {
         $params = array(":customerID" => $customerID);
         $sth = getPDO()->prepare("SELECT `id`, `start_date`, `pincode`, `trip_id`, `status_id` FROM `reservations` WHERE `customer_id` = :customerID;");

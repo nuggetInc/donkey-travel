@@ -77,13 +77,20 @@ class Customer
         $sth->execute($params);
     }
 
+    public static function delete(int $id)
+    {
+        $params = array(":id" => $id);
+        $sth = getPDO()->prepare("DELETE FROM `customers` WHERE `id` = :id");
+        $sth->execute($params);
+    }
+
     /** Get a customer by email
      * 
      * @param string $email The email of the customer to get
      * 
      * @return \Customer The customer or null if it can't be found
      */
-    public static function byEmail(string $email): ?Customer
+    public static function getByEmail(string $email): ?Customer
     {
         $params = array(":email" => $email);
         $sth = getPDO()->prepare("SELECT `id`, `name`, `phonenumber`, `password` FROM `customers` WHERE `email` = :email");
