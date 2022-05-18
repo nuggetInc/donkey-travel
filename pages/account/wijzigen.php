@@ -44,4 +44,5 @@ if (isset($_POST["edit"]))
 
     <input type="submit" name="edit" value="Bewaren" />
 </form>
+<a href="<?= ROOT_DIR ?>account/verwijderen">Verwijderen</a>
 <a href="<?= ROOT_DIR ?>">Annuleren</a>
