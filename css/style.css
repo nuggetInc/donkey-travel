@@ -1,3 +1,8 @@
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 th,
 td {
     border: 1px solid;
