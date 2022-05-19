@@ -22,7 +22,7 @@ if (isset($_POST["edit"]))
         (int)$_GET["id"],
         strtotime($_POST["date"]),
         $reservation->getPincode(),
-        $_POST["tripID"],
+        (int)$_POST["tripID"],
         $reservation->getCustomerID(),
         $reservation->getStatusID()
     );
