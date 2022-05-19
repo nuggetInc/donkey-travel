@@ -29,7 +29,7 @@ class Reservation
     public function getEndDate(): int
     {
         // The 24 * 60 * 60 is there to convert days to seconds
-        return $this->startDate + $this->trip->getDayCount() * 24 * 60 * 60;
+        return $this->startDate + $this->getTrip()->getDayCount() * 24 * 60 * 60;
     }
 
     public function getPincode(): int
@@ -59,12 +59,12 @@ class Reservation
 
     public function getCustomer(): Customer
     {
-        return Customer::get($this->customer);
+        return Customer::get($this->customerID);
     }
 
     public function getStatus(): Status
     {
-        return Status::get($this->status);
+        return Status::get($this->statusID);
     }
 
     public static function update(int $id, int $startDate, int $pincode, int $tripID, int $customerID, int $statusID)
