@@ -36,11 +36,11 @@ $password = htmlspecialchars($_SESSION["login-password"] ?? "");
     <h1>Mijn Donkey Travel inloggen</h1>
 
     <label>E-mailadres
-        <input type="email" name="email" placeholder="E-mailadres" value="<?= $email ?>" onfocus="this.select()" required />
+        <input type="email" name="email" placeholder="E-mailadres" value="<?= htmlspecialchars($email) ?>" onfocus="this.select()" required />
     </label>
 
     <label>Wachtwoord
-        <input type="password" name="password" placeholder="Wachtwoord" value="<?= $password ?>" onfocus="this.select()" required />
+        <input type="password" name="password" placeholder="Wachtwoord" onfocus="this.select()" required />
     </label>
 
     <button type="submit" name="login">Inloggen</button>

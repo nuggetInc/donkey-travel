@@ -29,15 +29,15 @@ if (isset($_POST["edit"]))
 <h2>Account wijzigen</h2>
 <form method="POST">
     <label>Naam:
-        <input type="text" name="name" value="<?= htmlspecialchars($customer->getName()) ?>" required />
+        <input type="text" name="name" value="<?= htmlspecialchars($customer->getName()) ?>" onfocus="this.select()" required />
     </label>
 
     <label>E-mail adres:
-        <input type="email" name="email" value="<?= htmlspecialchars($customer->getEmail()) ?>" required />
+        <input type="email" name="email" value="<?= htmlspecialchars($customer->getEmail()) ?>" onfocus="this.select()" required />
     </label>
 
     <label>Telefoon:
-        <input type="tel" name="phonenumber" value="<?= htmlspecialchars($customer->getPhonenumber()) ?>" required />
+        <input type="tel" name="phonenumber" value="<?= htmlspecialchars($customer->getPhonenumber()) ?>" onfocus="this.select()" required />
     </label>
 
     <label>Wachtwoord:

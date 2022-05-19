@@ -43,7 +43,7 @@ $trips = Trip::getAll();
     <label>Tocht:
         <select name="tripID">
             <?php foreach ($trips as $id => $trip) : ?>
-                <option value="<?= $id ?>"><?= $trip->getRoute() ?></option>
+                <option value="<?= $id ?>"><?= htmlspecialchars($trip->getRoute()) ?></option>
             <?php endforeach ?>
         </select>
     </label>
