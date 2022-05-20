@@ -8,7 +8,7 @@ require_once("classes/Status.php");
 require_once("classes/Trip.php");
 session_start();
 
-const ROOT_DIR = "/donkey-travel/";
+define("ROOT_DIR", substr($_SERVER["PHP_SELF"], 0, -strlen("index.php")));
 
 /** Get PDO instance */
 function getPDO(): PDO
