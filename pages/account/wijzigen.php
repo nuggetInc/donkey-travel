@@ -76,3 +76,11 @@ if (isset($_POST["edit"]))
 </form>
 <a href="<?= ROOT_DIR ?>account/verwijderen">Verwijderen</a>
 <a href="<?= ROOT_DIR ?>">Annuleren</a>
+<?php
+
+unset($_SESSION["error"]);
+unset($_SESSION["name"]);
+unset($_SESSION["email"]);
+unset($_SESSION["phonenumber"]);
+
+?>
