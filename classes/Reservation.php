@@ -67,6 +67,22 @@ class Reservation
         return Status::get($this->statusID);
     }
 
+    public static function create(int $startDate, int $pincode, int $tripID, int $customerID, int $statusID){
+        $params = array(
+            ":startDate" => date("Y-m-d", $startDate),
+            ":pincode" => $pincode,
+            ":tripID" => $tripID,
+            ":customerID" => $customerID,
+            ":statusID" => $statusID
+        );
+        $sth = getPDO()->prepare(
+            "INSERT INTO `reservations` (`start_date`, `pincode`, `trip_id`, `customer_id`, `status_id`) 
+            VALUES (:startDate, :pincode, :tripID, :customerID, :statusID);"
+        );
+        $sth->execute($params);
+    }
+
+
     public static function update(int $id, int $startDate, int $pincode, int $tripID, int $customerID, int $statusID)
     {
         $params = array(
