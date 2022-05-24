@@ -19,6 +19,7 @@ if (isset($_POST["login"]))
         }
     }
 
+    $_SESSION["error"] = "Het E-mailadres of het wachtwoord is incorrect";
     // Reaching here means the email or password is incorrect 
 
     $_SESSION["login-email"] = $email;
@@ -34,6 +35,10 @@ $password = htmlspecialchars($_SESSION["login-password"] ?? "");
 ?>
 <form method="POST">
     <h1>Mijn Donkey Travel inloggen</h1>
+
+    <?php if (isset($_SESSION["error"])) : ?>
+        <p><?= $_SESSION["error"] ?></p>
+    <?php endif ?>
 
     <label>E-mailadres
         <input type="email" name="email" placeholder="E-mailadres" value="<?= htmlspecialchars($email) ?>" onfocus="this.select()" required />
@@ -51,6 +56,7 @@ $password = htmlspecialchars($_SESSION["login-password"] ?? "");
 
 <?php
 
+unset($_SESSION["error"]);
 unset($_SESSION["login-email"]);
 unset($_SESSION["login-password"]);
 
