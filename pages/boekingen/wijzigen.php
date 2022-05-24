@@ -18,32 +18,50 @@ if (!isset($reservation) || $reservation->getCustomerID() !== $_SESSION["custome
 
 if (isset($_POST["edit"]))
 {
-    $reservation = Reservation::update(
-        (int)$_GET["id"],
-        strtotime($_POST["date"]),
-        $reservation->getPincode(),
-        (int)$_POST["tripID"],
-        $reservation->getCustomerID(),
-        $reservation->getStatusID()
-    );
+    $id = (int)$_GET["id"];
+    $date = strtotime($_POST["date"]);
+    $pincode = $reservation->getPincode();
+    $tripID = (int)$_POST["tripID"];
+    $customerID = $_SESSION["customerID"];
+    $statusID = $reservation->getStatusID();
+
+    if ($date <= strtotime("now"))
+    {
+        $_SESSION["error"] = "De datum moet na vandaag zijn";
+
+        $_SESSION["date"] = $date;
+        $_SESSION["tripID"] = $tripID;
+
+        header("Location: " . ROOT_DIR . "boekingen/wijzigen?id={$id}");
+        exit;
+    }
+
+    $reservation = Reservation::update($id, $date, $pincode, $tripID, $customerID, $statusID);
 
     header("Location: " . ROOT_DIR . "boekingen");
     exit;
 }
 
-$trips = Trip::getAll();
-
 ?>
-<h2>Boekingen wijzigen</h2>
 <form method="POST">
+    <h2>Boekingen wijzigen</h2>
+
+    <?php if (isset($_SESSION["error"])) : ?>
+        <p><?= $_SESSION["error"] ?></p>
+    <?php endif ?>
+
     <label>Startdatum:
-        <input type="date" name="date" value="<?= date("Y-m-d", $reservation->getStartDate()) ?>" />
+        <input type="date" name="date" value="<?= date("Y-m-d", $_SESSION["date"] ?? $reservation->getStartDate()) ?>" />
     </label>
 
     <label>Tocht:
         <select name="tripID">
-            <?php foreach ($trips as $id => $trip) : ?>
-                <option value="<?= $id ?>"><?= htmlspecialchars($trip->getRoute()) ?></option>
+            <?php foreach (Trip::getAll() as $id => $trip) : ?>
+                <?php if ($id === $_SESSION["tripID"] ?? $reservation->getTripID()) : ?>
+                    <option value="<?= $id ?>" selected><?= htmlspecialchars($trip->getRoute()) ?></option>
+                <?php else : ?>
+                    <option value="<?= $id ?>"><?= htmlspecialchars($trip->getRoute()) ?></option>
+                <?php endif ?>
             <?php endforeach ?>
         </select>
     </label>
@@ -51,3 +69,10 @@ $trips = Trip::getAll();
     <input type="submit" name="edit" value="Wijzigen" />
 </form>
 <a href="<?= ROOT_DIR ?>boekingen">Annuleren</a>
+<?php
+
+unset($_SESSION["error"]);
+unset($_SESSION["date"]);
+unset($_SESSION["tripID"]);
+
+?>
