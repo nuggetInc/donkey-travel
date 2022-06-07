@@ -11,7 +11,7 @@ $trips = Trip::getAll();
             <option value="<?= $id ?>"><?= htmlspecialchars($trip->getRoute()) ?></option>
         <?php endforeach ?>
     </select>
-    <input type="submit">
+    <input type="submit" value="Aanvragen">
 </form>
 <?php
 if (isset($_POST['date']) && isset($_POST['tripID'])) {
