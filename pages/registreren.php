@@ -5,6 +5,7 @@ if(isset($_POST['Signup_submit']) && $_POST['wachtwoord'] == $_POST['wwRepeat'])
     $password =  password_hash($_POST["wachtwoord"], PASSWORD_DEFAULT);
     customer::create($_POST['naam'], $_POST['email'], $_POST['telefoon'], $password);
     header('Location: '.ROOT_DIR.'inloggen');
+    exit;
 }
 
 ?>
