@@ -1,7 +1,9 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-    RewriteRule \.css$ - [L]
+    # RewriteRule ^map/ - [L]
+    
+    RewriteRule ^public/ - [L]
 
     RewriteRule ^ index.php [L]
 </IfModule>

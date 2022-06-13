@@ -9,6 +9,7 @@ require_once("classes/Trip.php");
 session_start();
 
 define("ROOT_DIR", substr($_SERVER["PHP_SELF"], 0, -strlen("index.php")));
+define("PUBLIC_DIR", ROOT_DIR . "public/");
 
 /** Get PDO instance */
 function getPDO(): PDO
@@ -23,7 +24,7 @@ function getPDO(): PDO
 <html>
 
 <head>
-    <link rel="stylesheet" href="<?= ROOT_DIR ?>css/style.css">
+    <link rel="stylesheet" href="<?= PUBLIC_DIR ?>css/style.css" />
     <title>Donkey Travel</title>
 </head>
 
@@ -33,29 +34,28 @@ function getPDO(): PDO
     // Get the page and split on "/"
     $path = explode("/", trim(substr($_SERVER["REDIRECT_URL"], strlen(ROOT_DIR)), "/"));
 
-    switch ($path[0])
-    {
+    switch ($path[0]) {
         case "inloggen":
         case "registreren":
         case "uitloggen":
+        case "map":
             require("pages/{$path[0]}.php");
             break;
         case "boekingen":
         case "account":
-            if (isset($_SESSION["customerID"]))
-            {
+            if (isset($_SESSION["customerID"])) {
                 require("header.php");
                 require("pages/{$path[0]}.php");
-                break;
+            } else {
+                require("pages/inloggen.php");
             }
+
+            break;
         default:
-            if (isset($_SESSION["customerID"]))
-            {
+            if (isset($_SESSION["customerID"])) {
                 require("header.php");
                 require("pages/boekingen.php");
-            }
-            else
-            {
+            } else {
                 require("pages/inloggen.php");
             }
 
