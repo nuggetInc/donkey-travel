@@ -33,26 +33,27 @@ $email = htmlspecialchars($_SESSION["login-email"] ?? "");
 $password = htmlspecialchars($_SESSION["login-password"] ?? "");
 
 ?>
-<form method="POST">
-    <h1>Mijn Donkey Travel inloggen</h1>
+<div class="center">
+    <form method="POST">
+        <h1 class="title">Mijn Donkey Travel inloggen</h1>
 
-    <?php if (isset($_SESSION["error"])) : ?>
-        <p><?= $_SESSION["error"] ?></p>
-    <?php endif ?>
+        <?php if (isset($_SESSION["error"])) : ?>
+            <p><?= $_SESSION["error"] ?></p>
+        <?php endif ?>
 
-    <label>E-mailadres
-        <input type="email" name="email" placeholder="E-mailadres" value="<?= htmlspecialchars($email) ?>" onfocus="this.select()" required />
-    </label>
+        <label>E-mailadres
+            <input type="email" name="email" placeholder="E-mailadres" value="<?= htmlspecialchars($email) ?>" onfocus="this.select()" required />
+        </label>
 
-    <label>Wachtwoord
-        <input type="password" name="password" placeholder="Wachtwoord" onfocus="this.select()" required />
-    </label>
+        <label>Wachtwoord
+            <input type="password" name="password" placeholder="Wachtwoord" onfocus="this.select()" required />
+        </label>
 
-    <button type="submit" name="login">Inloggen</button>
-</form>
-
-<h2>Nog geen account?</h2>
-<a href="<?= ROOT_DIR . "registreren" ?>">Maak er hier eentje aan!</a>
+        <button class="widthLoginButton" type="submit" name="login">Inloggen</button>
+    </form>
+    <h3 class="title">Nog geen account?</h3>
+    <a href="<?= ROOT_DIR . "registreren" ?>">Maak er hier eentje aan!</a>
+</div>
 
 <?php
 

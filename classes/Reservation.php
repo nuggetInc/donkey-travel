@@ -82,7 +82,6 @@ class Reservation
         $sth->execute($params);
     }
 
-
     public static function update(int $id, int $startDate, int $pincode, int $tripID, int $customerID, int $statusID)
     {
         $params = array(
@@ -148,4 +147,25 @@ class Reservation
 
         return $reservations;
     }
+
+    public function updatePIN(int $id, int $pincode)
+    {
+        $params = array(
+            ":id" => $id,
+            ":pincode" => $pincode,
+        );
+        $sth = getPDO()->prepare(
+            "UPDATE `reservations` SET `pincode` = :pincode WHERE `id` = :id;"
+        );
+        $sth->execute($params);
+        $this->pincode = $pincode;
+    }
+
+    public static function GeneratePIN()
+    {
+        $pincode = rand(1231,9879);
+
+        return $pincode;
+    }
+
 }
