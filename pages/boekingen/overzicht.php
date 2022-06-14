@@ -50,9 +50,15 @@ $reservations = Reservation::getByCustomerID($_SESSION["customerID"]);
                         <?php } ?>
                     </td>
                     <td>
-                        <a href="<?= ROOT_DIR ?>map/?pincode=<?= $reservation->getPincode() ?>&route=<?= $reservation->getTrip()->getRoute() ?>">
-                            <?= $reservation->getTrip()->getRoute() ?>
-                        </a>
+                        <?php if ($reservation->getPincode() == 0) : ?>
+                            <a href="<?= ROOT_DIR ?>map?route=<?= $reservation->getTrip()->getRoute() ?>">
+                                <?= $reservation->getTrip()->getRoute() ?>
+                            </a>
+                        <?php else : ?>
+                            <a href="<?= ROOT_DIR ?>map?pincode=<?= $reservation->getPincode() ?>&route=<?= $reservation->getTrip()->getRoute() ?>">
+                                <?= $reservation->getTrip()->getRoute() ?>
+                            </a>
+                        <?php endif ?>
                     </td>
                     <td><?= $reservation->getStatus()->getStatus() ?></td>
                     <td>
