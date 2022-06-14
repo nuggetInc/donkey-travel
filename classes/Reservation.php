@@ -161,7 +161,7 @@ class Reservation
         return null;
     }
 
-    public function updatePIN(int $id, int $pincode)
+    public static function updatePIN(int $id, int $pincode)
     {
         $params = array(
             ":id" => $id,
@@ -171,13 +171,10 @@ class Reservation
             "UPDATE `reservations` SET `pincode` = :pincode WHERE `id` = :id;"
         );
         $sth->execute($params);
-        $this->pincode = $pincode;
     }
 
     public static function GeneratePIN()
     {
-        $pincode = rand(1231, 9879);
-
-        return $pincode;
+        return rand(1231, 9879);
     }
 }

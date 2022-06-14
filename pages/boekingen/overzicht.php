@@ -2,6 +2,21 @@
 
 declare(strict_types=1);
 $reservations = Reservation::getByCustomerID($_SESSION["customerID"]);
+
+if (isset($_POST["request"])) {
+    Reservation::updatePIN((int)$_POST["reservationID"], Reservation::generatePIN());
+
+    header("Location: " . ROOT_DIR . "boekingen/");
+    exit;
+} else if (isset($_POST["delete"])) {
+    $pincode = Reservation::get((int)$_POST["reservationID"])->getPincode();
+    Reservation::updatePIN((int)$_POST["reservationID"], 0);
+    Tracker::removePincode($pincode);
+
+    header("Location: " . ROOT_DIR . "boekingen/");
+    exit;
+}
+
 ?>
 <h2>Boekingen</h2>
 <table>
@@ -20,52 +35,34 @@ $reservations = Reservation::getByCustomerID($_SESSION["customerID"]);
     <tbody>
         <?php foreach ($reservations as $id => $reservation) : ?>
             <tr>
-                <form method="POST">
-                    <td><?= date("d-m-Y", $reservation->getStartDate()) ?></td>
-                    <td><?= date("d-m-Y", $reservation->getEndDate()) ?></td>
-                    <td>
-                        <?php
-                        if ($reservation->getPincode() != 0) {
-                            if (isset($_POST['yes' . $id])) {
-                                $reservation->updatePIN($id, 0);
-                                header("Location: " . ROOT_DIR . "boekingen/");
-                            }
-
-                        ?>
-                            <form method="POST">
-                                <button type="submit" value="true" name="yes<?= $id ?>"><?php echo ($reservation->getPincode() . " x"); ?></button>
-
-                            </form>
-                        <?php
-                        } else {
-                            if (isset($_POST['PINRequested' . $id])) {
-                                $reservation->updatePIN($id, $reservation->generatePIN());
-                                header("Location: " . ROOT_DIR . "boekingen/");
-                            }
-                        ?>
-
-                            <input type="hidden" value="true" name="PINRequested<?= $id ?>">
-                            <input type="submit" value="PIN Code aanvragen">
-
-                        <?php } ?>
-                    </td>
-                    <td>
+                <td><?= date("d-m-Y", $reservation->getStartDate()) ?></td>
+                <td><?= date("d-m-Y", $reservation->getEndDate()) ?></td>
+                <td>
+                    <form method="POST">
+                        <input type="hidden" name="reservationID" value="<?= $id ?>">
                         <?php if ($reservation->getPincode() == 0) : ?>
-                            <a href="<?= ROOT_DIR ?>map?route=<?= $reservation->getTrip()->getRoute() ?>">
-                                <?= $reservation->getTrip()->getRoute() ?>
-                            </a>
+                            <input type="submit" name="request" value="PIN Code aanvragen">
                         <?php else : ?>
-                            <a href="<?= ROOT_DIR ?>map?pincode=<?= $reservation->getPincode() ?>&route=<?= $reservation->getTrip()->getRoute() ?>">
-                                <?= $reservation->getTrip()->getRoute() ?>
-                            </a>
+                            <input type="submit" name="delete" value="<?= $reservation->getPincode() . " x" ?>">
                         <?php endif ?>
-                    </td>
-                    <td><?= $reservation->getStatus()->getStatus() ?></td>
-                    <td>
-                        <a href="<?= ROOT_DIR ?>boekingen/wijzigen?id=<?= $id ?>">...</a>
-                        <a href="<?= ROOT_DIR ?>boekingen/verwijderen?id=<?= $id ?>">X</a>
-                    </td>
-                </form>
+                    </form>
+                </td>
+                <td>
+                    <?php if ($reservation->getPincode() == 0) : ?>
+                        <a href="<?= ROOT_DIR ?>map?route=<?= $reservation->getTrip()->getRoute() ?>">
+                            <?= $reservation->getTrip()->getRoute() ?>
+                        </a>
+                    <?php else : ?>
+                        <a href="<?= ROOT_DIR ?>map?pincode=<?= $reservation->getPincode() ?>&route=<?= $reservation->getTrip()->getRoute() ?>">
+                            <?= $reservation->getTrip()->getRoute() ?>
+                        </a>
+                    <?php endif ?>
+                </td>
+                <td><?= $reservation->getStatus()->getStatus() ?></td>
+                <td>
+                    <a href="<?= ROOT_DIR ?>boekingen/wijzigen?id=<?= $id ?>">...</a>
+                    <a href="<?= ROOT_DIR ?>boekingen/verwijderen?id=<?= $id ?>">X</a>
+                </td>
             </tr>
         <?php endforeach ?>
     </tbody>
