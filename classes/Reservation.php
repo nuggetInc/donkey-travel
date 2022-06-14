@@ -67,7 +67,8 @@ class Reservation
         return Status::get($this->statusID);
     }
 
-    public static function create(int $startDate, int $pincode, int $tripID, int $customerID, int $statusID){
+    public static function create(int $startDate, int $pincode, int $tripID, int $customerID, int $statusID)
+    {
         $params = array(
             ":startDate" => date("Y-m-d", $startDate),
             ":pincode" => $pincode,
@@ -148,6 +149,18 @@ class Reservation
         return $reservations;
     }
 
+    public static function getByPincode(int $pincode): ?Reservation
+    {
+        $params = array(":pincode" => $pincode);
+        $sth = getPDO()->prepare("SELECT `id`, `start_date`, `trip_id`, `customer_id`, `status_id` FROM `reservations` WHERE `pincode` = :pincode;");
+        $sth->execute($params);
+
+        if ($row = $sth->fetch())
+            return new Reservation($row["id"], strtotime($row["start_date"]), $pincode, $row["trip_id"], $row["customer_id"], $row["status_id"]);
+
+        return null;
+    }
+
     public function updatePIN(int $id, int $pincode)
     {
         $params = array(
@@ -163,9 +176,8 @@ class Reservation
 
     public static function GeneratePIN()
     {
-        $pincode = rand(1231,9879);
+        $pincode = rand(1231, 9879);
 
         return $pincode;
     }
-
 }
