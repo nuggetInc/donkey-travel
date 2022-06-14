@@ -1,8 +1,6 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-    # RewriteRule ^map/ - [L]
-    
     RewriteRule ^public/ - [L]
 
     RewriteRule ^ index.php [L]

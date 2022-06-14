@@ -4,38 +4,13 @@ $pincode = $_GET["pincode"] ?? 0;
 $route = $_GET["route"] ?? null;
 $viewguesttrackers = isset($_GET["VGT"]) ? "true" : "false";
 
-// if ($route) {
-//      $content = '
-//      <body onload="Init()">
-//           <div id="map">
-//           </div>
-//          <div id="status">
-//               <span id="tijd"></span>&nbsp;
-//               <span id="messages"></span>&nbsp;
-//               <span id="action"></span>&nbsp;
-//               <span id="error"></span>
-//          </div>
-//      </body>';
-// } else {
-//      $content = '  
-//      <body>
-//           <header>
-//                Donkey Travel Locatietracker
-//           </header>
-
-//           <section>
-//                <article>
-//                     <div id="map">
-//                          <p>Routenaam is ongeldig, 
-//                          </p>
-//                     </div>
-//                </article>
-//           </section>
-//           <footer>
-//                <span>&nbsp;</span>
-//           </footer>
-//      </body>';
-// }
+if (isset($_GET["pincode"]) && $reservation = Reservation::getByPincode((int)$_GET["pincode"])) {
+     $date = strtotime(date("d-m-Y"));
+     if ($reservation->getStartDate() < $now || $reservation->getEndDate() >= $now) {
+          header("Location: " . ROOT_DIR . "map");
+          exit;
+     }
+}
 
 ?>
 <link href="<?= PUBLIC_DIR ?>css/map.css" type="text/css" rel="stylesheet" />

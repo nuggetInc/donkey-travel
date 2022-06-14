@@ -25,7 +25,11 @@ $reservations = Reservation::getByCustomerID($_SESSION["customerID"])
                 <td><?= date("d-m-Y", $reservation->getStartDate()) ?></td>
                 <td><?= date("d-m-Y", $reservation->getEndDate()) ?></td>
                 <td><?= $reservation->getPincode() ?></td>
-                <td><?= $reservation->getTrip()->getRoute() ?></td>
+                <td>
+                    <a href="<?= ROOT_DIR ?>map/?pincode=<?= $reservation->getPincode() ?>&route=<?= $reservation->getTrip()->getRoute() ?>">
+                        <?= $reservation->getTrip()->getRoute() ?>
+                    </a>
+                </td>
                 <td><?= $reservation->getStatus()->getStatus() ?></td>
                 <td>
                     <a href="<?= ROOT_DIR ?>boekingen/wijzigen?id=<?= $id ?>">...</a>
