@@ -57,6 +57,20 @@ class Customer
         return null;
     }
 
+    public static function create(string $name, string $email, string $phonenumber, string $password)
+    {
+        $params = array(
+            ":name" => $name,
+            ":email" => $email,
+            ":phonenumber" => $phonenumber,
+            ":password" => $password
+        );
+        $sth = getPDO()->prepare(
+            "INSERT INTO `customers` (`name`, `email`, `phonenumber`, `password`) VALUES (:name, :email, :phonenumber, :password)"
+        );
+        $sth->execute($params);
+    }
+
     public static function update(int $id, string $name, string $email, string $phonenumber, string $password)
     {
         $params = array(

@@ -8,7 +8,7 @@ if (isset($_POST["login"])) {
 
     if ($reservation = Reservation::getByPincode((int)$pincode)) {
         $date = strtotime(date("d-m-Y"));
-        if ($reservation->getStartDate() >= $now && $reservation->getEndDate() < $now) {
+        if ($reservation->getStartDate() < $date || $reservation->getEndDate() >= $date) {
             header("Location: " . ROOT_DIR . "map?pincode=$pincode&route=" . $reservation->getTrip()->getRoute());
             exit;
         }
@@ -18,7 +18,7 @@ if (isset($_POST["login"])) {
         $_SESSION["error"] = "De pincode is incorrect";
     }
 
-    header("Location: " . ROOT_DIR);
+    header("Location: " . ROOT_DIR . "map");
     exit;
 }
 

@@ -6,9 +6,8 @@ $viewguesttrackers = isset($_GET["VGT"]) ? "true" : "false";
 
 if (isset($_GET["pincode"]) && $reservation = Reservation::getByPincode((int)$_GET["pincode"])) {
      $date = strtotime(date("d-m-Y"));
-     if ($reservation->getStartDate() < $now || $reservation->getEndDate() >= $now) {
-          header("Location: " . ROOT_DIR . "map");
-          exit;
+     if ($reservation->getStartDate() >= $date || $reservation->getEndDate() < $date) {
+          $pincode = 0;
      }
 }
 

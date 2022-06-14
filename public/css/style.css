@@ -1,3 +1,4 @@
+/*general settings*/
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
@@ -6,4 +7,37 @@ body {
 th,
 td {
     border: 1px solid;
+}
+
+.title {
+    margin: 0;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.widthLoginButton{
+    width: 5rem;
+}
+
+/*centers horizontally, and lowers vertically*/
+.center {
+    margin: 0;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
