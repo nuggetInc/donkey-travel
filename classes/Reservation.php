@@ -131,6 +131,19 @@ class Reservation
         return null;
     }
 
+    public static function getAll(): array
+    {
+        $sth = getPDO()->prepare("SELECT `id`, `start_date`, `pincode`, `trip_id`, `customer_id`, `status_id` FROM `reservations`;");
+        $sth->execute();
+
+        $reservations = array();
+
+        while ($row = $sth->fetch())
+            $reservations[$row["id"]] = new Reservation($row["id"], strtotime($row["start_date"]), $row["pincode"], $row["trip_id"], $row["customer_id"], $row["status_id"]);
+
+        return $reservations;
+    }
+
     /** Gets all the reservations from a customer
      * 
      * @return array all the reservations

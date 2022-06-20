@@ -33,7 +33,7 @@ $password = htmlspecialchars($_SESSION["login-password"] ?? "");
         <p><?= $_SESSION["error"] ?></p>
     <?php endif ?>
 
-    <label>E-mailadres
+    <label>Pincode
         <input type="number" name="pincode" placeholder="Pincode" onfocus="this.select()" required />
     </label>
 

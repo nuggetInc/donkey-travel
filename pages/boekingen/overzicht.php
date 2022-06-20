@@ -10,8 +10,8 @@ if (isset($_POST["request"])) {
     exit;
 } else if (isset($_POST["delete"])) {
     $pincode = Reservation::get((int)$_POST["reservationID"])->getPincode();
-    Reservation::updatePIN((int)$_POST["reservationID"], 0);
     Tracker::removePincode($pincode);
+    Reservation::updatePIN((int)$_POST["reservationID"], 0);
 
     header("Location: " . ROOT_DIR . "boekingen/");
     exit;
