@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 $customer = Customer::get($_SESSION["customerID"]);
 
-if (isset($_POST["edit"]))
-{
+if (isset($_POST["edit"])) {
     $customerID = $_SESSION["customerID"];
     $name = $_POST["name"];
     $email =  $_POST["email"];
@@ -16,8 +15,7 @@ if (isset($_POST["edit"]))
     else
         $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL))
-    {
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $_SESSION["error"] = "Het E-mailadres ongeldig";
 
         $_SESSION["name"] = $name;
@@ -28,8 +26,7 @@ if (isset($_POST["edit"]))
         exit;
     }
 
-    if (!filter_var($phonenumber, FILTER_SANITIZE_NUMBER_INT))
-    {
+    if (!filter_var($phonenumber, FILTER_SANITIZE_NUMBER_INT)) {
         $_SESSION["error"] = "Het telefoonnummer is ongeldig";
 
         $_SESSION["name"] = $name;
@@ -49,33 +46,41 @@ if (isset($_POST["edit"]))
 }
 
 ?>
-<form method="POST">
-    <h2>Account wijzigen</h2>
+<div class="page-wrapper">
+    <form class="form" method="POST">
+        <header>Account wijzigen</header>
 
-    <?php if (isset($_SESSION["error"])) : ?>
-        <p><?= $_SESSION["error"] ?></p>
-    <?php endif ?>
+        <?php if (isset($_SESSION["error"])) : ?>
+            <p><?= $_SESSION["error"] ?></p>
+        <?php endif ?>
 
-    <label>Naam:
-        <input type="text" name="name" value="<?= htmlspecialchars($customer->getName()) ?>" onfocus="this.select()" required />
-    </label>
+        <label>
+            <header>Naam:</header>
+            <input type="text" name="name" value="<?= htmlspecialchars($customer->getName()) ?>" onfocus="this.select()" required />
+        </label>
 
-    <label>E-mail adres:
-        <input type="email" name="email" value="<?= htmlspecialchars($customer->getEmail()) ?>" onfocus="this.select()" required />
-    </label>
+        <label>
+            <header>E-mailadres:</header>
+            <input type="email" name="email" value="<?= htmlspecialchars($customer->getEmail()) ?>" onfocus="this.select()" required />
+        </label>
 
-    <label>Telefoon:
-        <input type="tel" name="phonenumber" value="<?= htmlspecialchars($customer->getPhonenumber()) ?>" onfocus="this.select()" required />
-    </label>
+        <label>
+            <header>Telefoon:</header>
+            <input type="tel" name="phonenumber" value="<?= htmlspecialchars($customer->getPhonenumber()) ?>" onfocus="this.select()" required />
+        </label>
 
-    <label>Wachtwoord:
-        <input type="password" name="password" placeholder="Nieuw wachtwoord" />
-    </label>
+        <label>
+            <header>Wachtwoord:</header>
+            <input type="password" name="password" placeholder="Nieuw wachtwoord" />
+        </label>
 
-    <input type="submit" name="edit" value="Bewaren" />
-</form>
-<a href="<?= ROOT_DIR ?>account/verwijderen">Verwijderen</a>
-<a href="<?= ROOT_DIR ?>">Annuleren</a>
+        <input type="submit" name="edit" value="Wijzigen" />
+
+        <footer>
+            <a class="link" title="Annuleer wijzigingen" href="<?= ROOT_DIR ?>account/bekijken">Annuleren</a>
+        </footer>
+    </form>
+</div>
 <?php
 
 unset($_SESSION["error"]);

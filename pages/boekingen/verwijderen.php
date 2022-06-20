@@ -45,6 +45,6 @@ if (isset($_POST["delete"])) {
 
         <input type="submit" name="delete" value="Verwijderen" />
 
-        <footer><a class="link" title="Annuleer wijzigingen" href="<?= ROOT_DIR ?>boekingen/bekijken?id=<?= $_GET["id"] ?>">Annuleren</a></footer>
+        <footer><a class="link" title="Annuleer Verwijdering" href="<?= ROOT_DIR ?>boekingen/bekijken?id=<?= $_GET["id"] ?>">Annuleren</a></footer>
     </form>
 </div>
