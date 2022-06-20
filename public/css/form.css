@@ -1,4 +1,4 @@
-form {
+.form {
     min-width: 15em;
     width: 40vmin;
 
@@ -7,23 +7,23 @@ form {
     gap: 1em;
 }
 
-form>header {
+.form>header {
     text-align: center;
     font-size: 2em;
     font-weight: bold;
 }
 
-form label {
+.form label {
     display: flex;
     flex-direction: column;
 }
 
-form label>header {
+.form label>header {
     margin-left: 1em;
     font-weight: bold;
 }
 
-form input {
+.form input {
     padding: .5em 1em;
 
     border: solid 2px green;
@@ -33,13 +33,13 @@ form input {
     outline-offset: 2px;
 }
 
-form input[type="submit"] {
+.form input[type="submit"] {
     background-color: green;
 
     color: white;
     font-weight: bold;
 }
 
-form>footer {
+.form>footer {
     text-align: center;
 }

@@ -32,7 +32,7 @@ $password = htmlspecialchars($_SESSION["login-password"] ?? "");
 ?>
 <header class="page-header" style="justify-content: center;"><span class="logo">Donkey<span class="green">Travel</span></span></header>
 <div class="page-wrapper">
-    <form method="POST">
+    <form class="form" method="POST">
         <header>Inloggen</header>
 
         <?php if (isset($_SESSION["error"])) : ?>
@@ -53,7 +53,7 @@ $password = htmlspecialchars($_SESSION["login-password"] ?? "");
 
         <footer>
             <span>Nog geen account?</span>
-            <a href="<?= ROOT_DIR . "registreren" ?>">Maak er eentje aan!</a>
+            <a class="link" href="<?= ROOT_DIR . "registreren" ?>">Maak er eentje aan!</a>
         </footer>
     </form>
 </div>
