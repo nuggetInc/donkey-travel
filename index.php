@@ -26,6 +26,7 @@ function getPDO(): PDO
 
 <head>
     <link rel="stylesheet" href="<?= PUBLIC_DIR ?>css/style.css" />
+    <link rel="stylesheet" href="<?= PUBLIC_DIR ?>css/form.css" />
     <title>Donkey Travel</title>
 </head>
 

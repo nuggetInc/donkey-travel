@@ -3,15 +3,12 @@
 declare(strict_types=1);
 
 // Only run logic if form is sumbitted
-if (isset($_POST["login"]))
-{
+if (isset($_POST["login"])) {
     $email = $_POST["email"];
     $password = $_POST["password"];
 
-    if ($customer = Customer::getByEmail($email))
-    {
-        if (password_verify($password, $customer->getPassword()))
-        {
+    if ($customer = Customer::getByEmail($email)) {
+        if (password_verify($password, $customer->getPassword())) {
             $_SESSION["customerID"] = $customer->getID();
 
             header("Location: " . ROOT_DIR);
@@ -33,26 +30,32 @@ $email = htmlspecialchars($_SESSION["login-email"] ?? "");
 $password = htmlspecialchars($_SESSION["login-password"] ?? "");
 
 ?>
-<div class="center">
+<header class="page-header" style="justify-content: center;"><span class="logo">Donkey<span class="green">Travel</span></span></header>
+<div class="page-wrapper">
     <form method="POST">
-        <h1 class="title">Mijn Donkey Travel inloggen</h1>
+        <header>Inloggen</header>
 
         <?php if (isset($_SESSION["error"])) : ?>
-            <p><?= $_SESSION["error"] ?></p>
+            <p class="error"><?= $_SESSION["error"] ?></p>
         <?php endif ?>
 
-        <label>E-mailadres
+        <label>
+            <header>E-mailadres</header>
             <input type="email" name="email" placeholder="E-mailadres" value="<?= htmlspecialchars($email) ?>" onfocus="this.select()" required />
         </label>
 
-        <label>Wachtwoord
+        <label>
+            <header>Wachtwoord</header>
             <input type="password" name="password" placeholder="Wachtwoord" onfocus="this.select()" required />
         </label>
 
-        <button class="widthLoginButton" type="submit" name="login">Inloggen</button>
+        <input type="submit" name="login" value="Inloggen" />
+
+        <footer>
+            <span>Nog geen account?</span>
+            <a href="<?= ROOT_DIR . "registreren" ?>">Maak er eentje aan!</a>
+        </footer>
     </form>
-    <h3 class="title">Nog geen account?</h3>
-    <a href="<?= ROOT_DIR . "registreren" ?>">Maak er hier eentje aan!</a>
 </div>
 
 <?php
