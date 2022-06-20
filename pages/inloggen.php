@@ -30,7 +30,7 @@ $email = htmlspecialchars($_SESSION["login-email"] ?? "");
 $password = htmlspecialchars($_SESSION["login-password"] ?? "");
 
 ?>
-<header class="page-header" style="justify-content: center;"><span class="logo">Donkey<span class="green">Travel</span></span></header>
+<header class="page-header"><span class="logo">Donkey<span class="green">Travel</span></span></header>
 <div class="page-wrapper">
     <form class="form" method="POST">
         <header>Inloggen</header>
