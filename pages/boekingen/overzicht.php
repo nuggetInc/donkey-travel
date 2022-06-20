@@ -31,6 +31,7 @@ if (isset($_POST["request"])) {
                 <th>
                     <a class="link" title="Boeking aanvragen" href="<?= ROOT_DIR ?>boekingen/aanvragen">+</a>
                 </th>
+
             </tr>
         </thead>
         <tbody>
@@ -39,14 +40,16 @@ if (isset($_POST["request"])) {
                     <td><?= date("d-m-Y", $reservation->getStartDate()) ?></td>
                     <td><?= date("d-m-Y", $reservation->getEndDate()) ?></td>
                     <td>
-                        <form method="POST">
-                            <input type="hidden" name="reservationID" value="<?= $id ?>">
-                            <?php if ($reservation->getPincode() == 0) : ?>
-                                <input class="link" title="PIN code aanvragen" type="submit" name="request" value="PIN Code aanvragen">
-                            <?php else : ?>
-                                <input class="link" title="PIN code verwijderen" type="submit" name="delete" value="<?= $reservation->getPincode() . " x" ?>">
-                            <?php endif ?>
-                        </form>
+                        <?php if ($reservation->getStatus()->getStatus() == "Definitief" && $reservation->isActive()) : ?>
+                            <form method="POST">
+                                <input type="hidden" name="reservationID" value="<?= $id ?>">
+                                <?php if ($reservation->getPincode() == 0) : ?>
+                                    <input class="link" title="PIN code aanvragen" type="submit" name="request" value="PIN Code aanvragen">
+                                <?php else : ?>
+                                    <input class="link" title="PIN code verwijderen" type="submit" name="delete" value="<?= $reservation->getPincode() . " x" ?>">
+                                <?php endif ?>
+                            </form>
+                        <?php endif ?>
                     </td>
                     <td>
                         <?php if ($reservation->getPincode() == 0) : ?>
