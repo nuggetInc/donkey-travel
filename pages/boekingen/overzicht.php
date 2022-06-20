@@ -38,14 +38,16 @@ if (isset($_POST["request"])) {
                 <td><?= date("d-m-Y", $reservation->getStartDate()) ?></td>
                 <td><?= date("d-m-Y", $reservation->getEndDate()) ?></td>
                 <td>
-                    <form method="POST">
-                        <input type="hidden" name="reservationID" value="<?= $id ?>">
-                        <?php if ($reservation->getPincode() == 0) : ?>
-                            <input type="submit" name="request" value="PIN Code aanvragen">
-                        <?php else : ?>
-                            <input type="submit" name="delete" value="<?= $reservation->getPincode() . " x" ?>">
-                        <?php endif ?>
-                    </form>
+                    <?php if ($reservation->getStatus()->getStatus() == "Definitief" && $reservation->isActive()) : ?>
+                        <form method="POST">
+                            <input type="hidden" name="reservationID" value="<?= $id ?>">
+                            <?php if ($reservation->getPincode() == 0) : ?>
+                                <input type="submit" name="request" value="PIN Code aanvragen">
+                            <?php else : ?>
+                                <input type="submit" name="delete" value="<?= $reservation->getPincode() . " x" ?>">
+                            <?php endif ?>
+                        </form>
+                    <?php endif ?>
                 </td>
                 <td>
                     <?php if ($reservation->getPincode() == 0) : ?>

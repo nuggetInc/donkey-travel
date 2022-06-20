@@ -4,11 +4,8 @@ $pincode = $_GET["pincode"] ?? 0;
 $route = $_GET["route"] ?? null;
 $viewguesttrackers = isset($_GET["VGT"]) ? "true" : "false";
 
-if (isset($_GET["pincode"]) && $reservation = Reservation::getByPincode((int)$_GET["pincode"])) {
-     $date = strtotime(date("d-m-Y"));
-     if ($reservation->getStartDate() >= $date || $reservation->getEndDate() < $date) {
-          $pincode = 0;
-     }
+if (isset($_GET["pincode"]) && !Reservation::getByPincode((int)$_GET["pincode"])->isActive()) {
+     $pincode = 0;
 }
 
 ?>

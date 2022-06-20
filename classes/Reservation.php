@@ -32,6 +32,13 @@ class Reservation
         return $this->startDate + $this->getTrip()->getDayCount() * 24 * 60 * 60;
     }
 
+    /** Does the current date fall in between the start and end date */
+    public function isActive(): bool
+    {
+        $date = strtotime(date("d-m-Y"));
+        return $this->getStartDate() <= $date && $this->getEndDate() > $date;
+    }
+
     public function getPincode(): int
     {
         return $this->pincode;
