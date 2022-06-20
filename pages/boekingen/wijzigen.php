@@ -39,32 +39,37 @@ if (isset($_POST["edit"])) {
 }
 
 ?>
-<form method="POST">
-    <h2>Boekingen wijzigen</h2>
+<div class="page-wrapper">
+    <form class="form" method="POST">
+        <header>Boeking wijzigen</header>
 
-    <?php if (isset($_SESSION["error"])) : ?>
-        <p><?= $_SESSION["error"] ?></p>
-    <?php endif ?>
+        <?php if (isset($_SESSION["error"])) : ?>
+            <p><?= $_SESSION["error"] ?></p>
+        <?php endif ?>
 
-    <label>Startdatum:
-        <input type="date" name="date" value="<?= date("Y-m-d", $_SESSION["date"] ?? $reservation->getStartDate()) ?>" />
-    </label>
+        <label>
+            <header>Startdatum:</header>
+            <input type="date" name="date" value="<?= date("Y-m-d", $_SESSION["date"] ?? $reservation->getStartDate()) ?>" />
+        </label>
 
-    <label>Tocht:
-        <select name="tripID">
-            <?php foreach (Trip::getAll() as $id => $trip) : ?>
-                <?php if ($id === ($_SESSION["tripID"] ?? $reservation->getTripID())) : ?>
-                    <option value="<?= $id ?>" selected><?= htmlspecialchars($trip->getRoute()) ?></option>
-                <?php else : ?>
-                    <option value="<?= $id ?>"><?= htmlspecialchars($trip->getRoute()) ?></option>
-                <?php endif ?>
-            <?php endforeach ?>
-        </select>
-    </label>
+        <label>
+            <header>Tocht:</header>
+            <select name="tripID">
+                <?php foreach (Trip::getAll() as $id => $trip) : ?>
+                    <?php if ($id === ($_SESSION["tripID"] ?? $reservation->getTripID())) : ?>
+                        <option value="<?= $id ?>" selected><?= htmlspecialchars($trip->getRoute()) ?></option>
+                    <?php else : ?>
+                        <option value="<?= $id ?>"><?= htmlspecialchars($trip->getRoute()) ?></option>
+                    <?php endif ?>
+                <?php endforeach ?>
+            </select>
+        </label>
 
-    <input type="submit" name="edit" value="Wijzigen" />
-</form>
-<a href="<?= ROOT_DIR ?>boekingen">Annuleren</a>
+        <input type="submit" name="edit" value="Wijzigen" />
+
+        <footer><a class="link" title="Annuleer wijzigingen" href="<?= ROOT_DIR ?>boekingen/bekijken?id=<?= $_GET["id"] ?>">Annuleren</a></footer>
+    </form>
+</div>
 <?php
 
 unset($_SESSION["error"]);

@@ -61,8 +61,7 @@ if (isset($_POST["request"])) {
                     </td>
                     <td><?= $reservation->getStatus()->getStatus() ?></td>
                     <td>
-                        <a class="link" title="Boeking wijzigen" href="<?= ROOT_DIR ?>boekingen/wijzigen?id=<?= $id ?>">...</a>
-                        <a class="link" title="Boeking verwijderen" href="<?= ROOT_DIR ?>boekingen/verwijderen?id=<?= $id ?>">X</a>
+                        <a class="link" title="Boeking bekijken" href="<?= ROOT_DIR ?>boekingen/bekijken?id=<?= $id ?>">...</a>
                     </td>
                 </tr>
             <?php endforeach ?>
