@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: May 12, 2022 at 12:04 PM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 8.1.2
+-- Host: localhost
+-- Generation Time: Jun 20, 2022 at 09:46 AM
+-- Server version: 10.8.3-MariaDB
+-- PHP Version: 8.1.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,7 +32,7 @@ CREATE TABLE `breakspots` (
   `reservation_id` int(11) NOT NULL,
   `restaurant_id` int(11) NOT NULL,
   `status_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 
@@ -47,14 +47,14 @@ CREATE TABLE `customers` (
   `phonenumber` varchar(20) NOT NULL,
   `password` varchar(100) NOT NULL,
   `edited` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `customers`
 --
 
 INSERT INTO `customers` (`id`, `name`, `email`, `phonenumber`, `password`, `edited`) VALUES
-(1, 'Cas', 'cas@donkeytravel.nl', '0612345678', '$2y$10$H4rIShA0C00E5EvTEusgLu5JTs1/TNyOkskTbz8VV567FEArh4b12', '2022-05-12 10:03:37'),
+(1, 'Cas', 'cas@donkeytravel.nl', '0612345678', '$2y$10$H4rIShA0C00E5EvTEusgLu5JTs1/TNyOkskTbz8VV567FEArh4b12', '2022-05-24 07:50:49'),
 (2, 'Tim', 'tim@donkeytravel.nl', '0612345678', '$2y$10$99pqDMy8/7ivZX50261Y7e3PCwV9ejVKNvg0Ywyqv.nPkWW9qbwi.', '2022-05-12 10:03:41'),
 (3, 'Daan', 'daan@donkeytravel.nl', '0612345678', '$2y$10$pmaAOJeSk0J7aOX6KZy3o.1twnTT6vbBiGxl3nHRQH/29zgPOzGZe', '2022-05-11 07:17:06');
 
@@ -72,7 +72,7 @@ CREATE TABLE `inns` (
   `phonenumber` varchar(20) NOT NULL,
   `coordinates` varchar(20) NOT NULL,
   `edited` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 
@@ -85,7 +85,7 @@ CREATE TABLE `overnight_stays` (
   `reservation_id` int(11) NOT NULL,
   `inn_id` int(11) NOT NULL,
   `status_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 
@@ -100,7 +100,14 @@ CREATE TABLE `reservations` (
   `trip_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
   `status_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Dumping data for table `reservations`
+--
+
+INSERT INTO `reservations` (`id`, `start_date`, `pincode`, `trip_id`, `customer_id`, `status_id`) VALUES
+(8, '2022-06-19', 0, 4, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -116,7 +123,7 @@ CREATE TABLE `restaurants` (
   `phonenumber` varchar(20) NOT NULL,
   `coordinates` varchar(20) NOT NULL,
   `edited` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 
@@ -130,7 +137,14 @@ CREATE TABLE `statuses` (
   `status` varchar(40) NOT NULL,
   `removeable` tinyint(4) NOT NULL,
   `assign_pin` tinyint(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Dumping data for table `statuses`
+--
+
+INSERT INTO `statuses` (`id`, `statuscode`, `status`, `removeable`, `assign_pin`) VALUES
+(0, 0, 'Eh...', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -144,7 +158,7 @@ CREATE TABLE `trackers` (
   `latitude` double NOT NULL,
   `longitude` double NOT NULL,
   `time` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 
@@ -157,7 +171,22 @@ CREATE TABLE `trips` (
   `description` varchar(40) NOT NULL,
   `route` varchar(50) NOT NULL,
   `day_count` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Dumping data for table `trips`
+--
+
+INSERT INTO `trips` (`id`, `description`, `route`, `day_count`) VALUES
+(4, 'Tocht door Altlay', 'Altlay', 3),
+(5, 'Tocht door Bremm', 'Bremm', 3),
+(6, 'Tocht door Klotten', 'Klotten', 3),
+(7, 'Tocht door Kyll', 'Kyll', 3),
+(8, 'Tocht door Leienkaul', 'Leienkaul', 3),
+(9, 'Tocht door Paflur', 'Paflur', 3),
+(10, 'Tocht door Stelvio', 'Stelvio', 3),
+(11, 'Tocht door Urzig', 'Urzig', 3),
+(12, 'Tocht door Wittlich', 'Wittlich', 3);
 
 --
 -- Indexes for dumped tables
@@ -200,7 +229,8 @@ ALTER TABLE `reservations`
   ADD PRIMARY KEY (`id`),
   ADD KEY `customer_id` (`customer_id`),
   ADD KEY `status_id` (`status_id`),
-  ADD KEY `trip_id` (`trip_id`);
+  ADD KEY `trip_id` (`trip_id`),
+  ADD KEY `pincode` (`pincode`);
 
 --
 -- Indexes for table `restaurants`
@@ -218,7 +248,8 @@ ALTER TABLE `statuses`
 -- Indexes for table `trackers`
 --
 ALTER TABLE `trackers`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `trackers_ibfk_1` (`pincode`);
 
 --
 -- Indexes for table `trips`
@@ -258,7 +289,7 @@ ALTER TABLE `overnight_stays`
 -- AUTO_INCREMENT for table `reservations`
 --
 ALTER TABLE `reservations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `restaurants`
@@ -270,19 +301,19 @@ ALTER TABLE `restaurants`
 -- AUTO_INCREMENT for table `statuses`
 --
 ALTER TABLE `statuses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `trackers`
 --
 ALTER TABLE `trackers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3248;
 
 --
 -- AUTO_INCREMENT for table `trips`
 --
 ALTER TABLE `trips`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
@@ -311,6 +342,12 @@ ALTER TABLE `reservations`
   ADD CONSTRAINT `reservations_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`),
   ADD CONSTRAINT `reservations_ibfk_2` FOREIGN KEY (`status_id`) REFERENCES `statuses` (`id`),
   ADD CONSTRAINT `reservations_ibfk_3` FOREIGN KEY (`trip_id`) REFERENCES `trips` (`id`);
+
+--
+-- Constraints for table `trackers`
+--
+ALTER TABLE `trackers`
+  ADD CONSTRAINT `trackers_ibfk_1` FOREIGN KEY (`pincode`) REFERENCES `reservations` (`pincode`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

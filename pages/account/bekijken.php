@@ -2,18 +2,14 @@
 
 declare(strict_types=1);
 
-if (isset($_POST["delete"])) {
-    Customer::delete($_SESSION["customerID"]);
-    unset($_SESSION["customerID"]);
-
-    header("Location: " . ROOT_DIR);
-    exit;
-}
-
 ?>
 <div class="page-wrapper">
     <form class="form" method="POST">
-        <header>Account verwijderen</header>
+        <header>Account wijzigen</header>
+
+        <?php if (isset($_SESSION["error"])) : ?>
+            <p><?= $_SESSION["error"] ?></p>
+        <?php endif ?>
 
         <label>
             <header>Naam:</header>
@@ -30,8 +26,12 @@ if (isset($_POST["delete"])) {
             <input type="tel" name="phonenumber" value="<?= htmlspecialchars($customer->getPhonenumber()) ?>" disabled />
         </label>
 
-        <input type="submit" name="delete" value="Definitief verwijderen" />
+        <input type="submit" name="edit" value="Bewaren" />
 
-        <footer><a class="link" title="Annuleer Verwijdering" href="<?= ROOT_DIR ?>account/bekijken">Annuleren</a></footer>
+        <footer>
+            <a class="link" title="Wijzig dit account" href="<?= ROOT_DIR ?>account/wijzigen">Wijzigen</a>
+            <a class="link" title="Verwijder dit account" href="<?= ROOT_DIR ?>account/verwijderen">Verwijderen</a>
+            <a class="link" title="Ga terug naar overzicht" href="<?= ROOT_DIR ?>boekingen/overzicht">Terug</a>
+        </footer>
     </form>
 </div>

@@ -2,22 +2,19 @@
 
 declare(strict_types=1);
 
-if (!isset($_GET["id"]))
-{
+if (!isset($_GET["id"])) {
     header("Location: " . ROOT_DIR . "boekingen");
     exit;
 }
 
 $reservation = Reservation::get((int)$_GET["id"]);
 
-if (!isset($reservation) || $reservation->getCustomerID() !== $_SESSION["customerID"])
-{
+if (!isset($reservation) || $reservation->getCustomerID() !== $_SESSION["customerID"]) {
     header("Location: " . ROOT_DIR . "boekingen");
     exit;
 }
 
-if (isset($_POST["edit"]))
-{
+if (isset($_POST["edit"])) {
     $id = (int)$_GET["id"];
     $date = strtotime($_POST["date"]);
     $pincode = $reservation->getPincode();
@@ -25,8 +22,7 @@ if (isset($_POST["edit"]))
     $customerID = $_SESSION["customerID"];
     $statusID = $reservation->getStatusID();
 
-    if ($date <= strtotime("now"))
-    {
+    if ($date <= strtotime("now")) {
         $_SESSION["error"] = "De datum moet na vandaag zijn";
 
         $_SESSION["date"] = $date;
@@ -43,32 +39,37 @@ if (isset($_POST["edit"]))
 }
 
 ?>
-<form method="POST">
-    <h2>Boekingen wijzigen</h2>
+<div class="page-wrapper">
+    <form class="form" method="POST">
+        <header>Boeking wijzigen</header>
 
-    <?php if (isset($_SESSION["error"])) : ?>
-        <p><?= $_SESSION["error"] ?></p>
-    <?php endif ?>
+        <?php if (isset($_SESSION["error"])) : ?>
+            <p><?= $_SESSION["error"] ?></p>
+        <?php endif ?>
 
-    <label>Startdatum:
-        <input type="date" name="date" value="<?= date("Y-m-d", $_SESSION["date"] ?? $reservation->getStartDate()) ?>" />
-    </label>
+        <label>
+            <header>Startdatum:</header>
+            <input type="date" name="date" value="<?= date("Y-m-d", $_SESSION["date"] ?? $reservation->getStartDate()) ?>" />
+        </label>
 
-    <label>Tocht:
-        <select name="tripID">
-            <?php foreach (Trip::getAll() as $id => $trip) : ?>
-                <?php if ($id === $_SESSION["tripID"] ?? $reservation->getTripID()) : ?>
-                    <option value="<?= $id ?>" selected><?= htmlspecialchars($trip->getRoute()) ?></option>
-                <?php else : ?>
-                    <option value="<?= $id ?>"><?= htmlspecialchars($trip->getRoute()) ?></option>
-                <?php endif ?>
-            <?php endforeach ?>
-        </select>
-    </label>
+        <label>
+            <header>Tocht:</header>
+            <select name="tripID">
+                <?php foreach (Trip::getAll() as $id => $trip) : ?>
+                    <?php if ($id === ($_SESSION["tripID"] ?? $reservation->getTripID())) : ?>
+                        <option value="<?= $id ?>" selected><?= htmlspecialchars($trip->getRoute()) ?></option>
+                    <?php else : ?>
+                        <option value="<?= $id ?>"><?= htmlspecialchars($trip->getRoute()) ?></option>
+                    <?php endif ?>
+                <?php endforeach ?>
+            </select>
+        </label>
 
-    <input type="submit" name="edit" value="Wijzigen" />
-</form>
-<a href="<?= ROOT_DIR ?>boekingen">Annuleren</a>
+        <input type="submit" name="edit" value="Wijzigen" />
+
+        <footer><a class="link" title="Annuleer wijzigingen" href="<?= ROOT_DIR ?>boekingen/bekijken?id=<?= $_GET["id"] ?>">Annuleren</a></footer>
+    </form>
+</div>
 <?php
 
 unset($_SESSION["error"]);

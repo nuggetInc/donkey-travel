@@ -32,6 +32,13 @@ class Reservation
         return $this->startDate + $this->getTrip()->getDayCount() * 24 * 60 * 60;
     }
 
+    /** Does the current date fall in between the start and end date */
+    public function isActive(): bool
+    {
+        $date = strtotime(date("d-m-Y"));
+        return $this->getStartDate() <= $date && $this->getEndDate() > $date;
+    }
+
     public function getPincode(): int
     {
         return $this->pincode;
@@ -129,6 +136,19 @@ class Reservation
             return new Reservation($id, strtotime($row["start_date"]), $row["pincode"], $row["trip_id"], $row["customer_id"], $row["status_id"]);
 
         return null;
+    }
+
+    public static function getAll(): array
+    {
+        $sth = getPDO()->prepare("SELECT `id`, `start_date`, `pincode`, `trip_id`, `customer_id`, `status_id` FROM `reservations`;");
+        $sth->execute();
+
+        $reservations = array();
+
+        while ($row = $sth->fetch())
+            $reservations[$row["id"]] = new Reservation($row["id"], strtotime($row["start_date"]), $row["pincode"], $row["trip_id"], $row["customer_id"], $row["status_id"]);
+
+        return $reservations;
     }
 
     /** Gets all the reservations from a customer

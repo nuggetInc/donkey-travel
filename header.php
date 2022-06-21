@@ -5,7 +5,16 @@ declare(strict_types=1);
 $customer = Customer::get($_SESSION["customerID"]);
 
 ?>
-<table>
+<header class="page-header">
+    <span class="logo">Donkey<span class="green">Travel</span></span>
+    <span class="info" title="Naam: <?= $customer->getName() ?>&#10;E-mailadres: <?= $customer->getEmail() ?>&#10;Telefoonnummer: <?= $customer->getPhonenumber() ?>"><?= $customer->getName() ?></span>
+    <ul class="nav">
+        <li><a class="link" title="Boekingen overzicht" href="<?= ROOT_DIR ?>boekingen" ?>Boekingen</a></li>
+        <li><a class="link" title="Account overzicht" href="<?= ROOT_DIR ?>account" ?>Account</a></li>
+        <li><a class="link" title="Uitloggen overzicht" href="<?= ROOT_DIR ?>uitloggen" ?>Uitloggen</a></li>
+    </ul>
+</header>
+<!-- <table>
     <tbody>
         <tr>
             <td>
@@ -31,4 +40,4 @@ $customer = Customer::get($_SESSION["customerID"]);
         <a href="<?= ROOT_DIR ?>account">Account</a>
     </li>
 </ul>
-<hr>
+<hr> -->
