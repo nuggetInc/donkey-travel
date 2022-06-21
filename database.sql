@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 20, 2022 at 09:46 AM
+-- Generation Time: Jun 21, 2022 at 11:39 AM
 -- Server version: 10.8.3-MariaDB
 -- PHP Version: 8.1.7
 
@@ -54,7 +54,7 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`id`, `name`, `email`, `phonenumber`, `password`, `edited`) VALUES
-(1, 'Cas', 'cas@donkeytravel.nl', '0612345678', '$2y$10$H4rIShA0C00E5EvTEusgLu5JTs1/TNyOkskTbz8VV567FEArh4b12', '2022-05-24 07:50:49'),
+(1, 'Cas de Loijer', 'cas@donkeytravel.nl', '0612345678', '$2y$10$H4rIShA0C00E5EvTEusgLu5JTs1/TNyOkskTbz8VV567FEArh4b12', '2022-06-20 15:54:06'),
 (2, 'Tim', 'tim@donkeytravel.nl', '0612345678', '$2y$10$99pqDMy8/7ivZX50261Y7e3PCwV9ejVKNvg0Ywyqv.nPkWW9qbwi.', '2022-05-12 10:03:41'),
 (3, 'Daan', 'daan@donkeytravel.nl', '0612345678', '$2y$10$pmaAOJeSk0J7aOX6KZy3o.1twnTT6vbBiGxl3nHRQH/29zgPOzGZe', '2022-05-11 07:17:06');
 
@@ -107,7 +107,8 @@ CREATE TABLE `reservations` (
 --
 
 INSERT INTO `reservations` (`id`, `start_date`, `pincode`, `trip_id`, `customer_id`, `status_id`) VALUES
-(8, '2022-06-19', 0, 4, 1, 0);
+(9, '2022-06-20', 0, 4, 1, 2),
+(10, '2022-06-22', 0, 8, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -144,7 +145,8 @@ CREATE TABLE `statuses` (
 --
 
 INSERT INTO `statuses` (`id`, `statuscode`, `status`, `removeable`, `assign_pin`) VALUES
-(0, 0, 'Eh...', 0, 0);
+(1, 0, 'Offerte', 1, 0),
+(2, 0, 'Definitief', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -271,7 +273,7 @@ ALTER TABLE `breakspots`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `inns`
@@ -289,7 +291,7 @@ ALTER TABLE `overnight_stays`
 -- AUTO_INCREMENT for table `reservations`
 --
 ALTER TABLE `reservations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `restaurants`
@@ -301,13 +303,13 @@ ALTER TABLE `restaurants`
 -- AUTO_INCREMENT for table `statuses`
 --
 ALTER TABLE `statuses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `trackers`
 --
 ALTER TABLE `trackers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3248;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3253;
 
 --
 -- AUTO_INCREMENT for table `trips`
