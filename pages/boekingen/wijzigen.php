@@ -10,11 +10,11 @@ if (isset($_POST["edit"])) {
     $customerID = $_SESSION["customerID"];
     $statusID = $reservation->getStatusID();
 
-    if ($date <= strtotime("now")) {
-        $_SESSION["error"] = "De datum moet na vandaag zijn";
-
+    if (strtotime(date("Y-m-d")) > strtotime($_POST["date"]) - 7 * 24 * 60 * 60) {
         $_SESSION["date"] = $date;
         $_SESSION["tripID"] = $tripID;
+
+        $_SESSION["error"] = "De startdatum van een boeking moet minstens een week in de toekomst liggen.";
 
         header("Location: " . ROOT_DIR . "boekingen/wijzigen?id={$id}");
         exit;

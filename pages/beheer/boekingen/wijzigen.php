@@ -10,7 +10,7 @@ if (isset($_POST["edit"])) {
     $customerID = $_SESSION["customerID"];
     $statusID = $reservation->getStatusID();
 
-    if ($date <= strtotime("now")) {
+    if ($date <= strtotime(date("Y-m-d"))) {
         $_SESSION["error"] = "De datum moet na vandaag zijn";
 
         $_SESSION["date"] = $date;

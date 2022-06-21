@@ -35,7 +35,7 @@ class Reservation
     /** Does the current date fall in between the start and end date */
     public function isActive(): bool
     {
-        $date = strtotime(date("d-m-Y"));
+        $date = strtotime(date("Y-m-d"));
         return $this->getStartDate() <= $date && $this->getEndDate() > $date;
     }
 

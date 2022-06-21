@@ -46,7 +46,6 @@ function getPDO(): PDO
         case "boekingen":
         case "account":
             if (isset($_SESSION["customerID"])) {
-                require("header.php");
                 require("pages/{$path[0]}.php");
             } else {
                 require("pages/inloggen.php");
@@ -55,7 +54,6 @@ function getPDO(): PDO
             break;
         default:
             if (isset($_SESSION["customerID"])) {
-                require("header.php");
                 require("pages/boekingen.php");
             } else {
                 require("pages/inloggen.php");
