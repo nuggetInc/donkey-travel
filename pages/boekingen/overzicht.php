@@ -19,7 +19,6 @@ if (isset($_POST["request"])) {
 
 ?>
 <div class="page-wrapper">
-    <h2>Boekingen</h2>
     <table>
         <thead>
             <tr>
