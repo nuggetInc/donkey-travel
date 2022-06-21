@@ -2,18 +2,6 @@
 
 declare(strict_types=1);
 
-if (!isset($_GET["id"])) {
-    header("Location: " . ROOT_DIR . "boekingen");
-    exit;
-}
-
-$reservation = Reservation::get((int)$_GET["id"]);
-
-if (!isset($reservation) || $reservation->getCustomerID() !== $_SESSION["customerID"]) {
-    header("Location: " . ROOT_DIR . "boekingen");
-    exit;
-}
-
 if (isset($_POST["edit"])) {
     $id = (int)$_GET["id"];
     $date = strtotime($_POST["date"]);
@@ -49,7 +37,7 @@ if (isset($_POST["edit"])) {
 
         <label>
             <header>Startdatum:</header>
-            <input type="date" name="date" value="<?= date("Y-m-d", $_SESSION["date"] ?? $reservation->getStartDate()) ?>" />
+            <input type="date" name="date" value="<?= date("Y-m-d", $_SESSION["date"] ?? $reservation->getStartDate()) ?>" autofocus required />
         </label>
 
         <label>

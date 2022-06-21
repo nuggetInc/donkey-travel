@@ -2,18 +2,6 @@
 
 declare(strict_types=1);
 
-if (!isset($_GET["id"])) {
-    header("Location: " . ROOT_DIR . "boekingen");
-    exit;
-}
-
-$reservation = Reservation::get((int)$_GET["id"]);
-
-if (!isset($reservation) || $reservation->getCustomerID() !== $_SESSION["customerID"]) {
-    header("Location: " . ROOT_DIR . "boekingen");
-    exit;
-}
-
 if (isset($_POST["delete"])) {
     Reservation::delete((int)$_GET["id"]);
 
