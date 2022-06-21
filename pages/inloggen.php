@@ -41,12 +41,12 @@ $password = htmlspecialchars($_SESSION["login-password"] ?? "");
 
         <label>
             <header>E-mailadres</header>
-            <input type="email" name="email" placeholder="E-mailadres" value="<?= htmlspecialchars($email) ?>" onfocus="this.select()" required />
+            <input type="email" name="email" placeholder="E-mailadres" value="<?= htmlspecialchars($email) ?>" autofocus required />
         </label>
 
         <label>
             <header>Wachtwoord</header>
-            <input type="password" name="password" placeholder="Wachtwoord" onfocus="this.select()" required />
+            <input type="password" name="password" placeholder="Wachtwoord" required />
         </label>
 
         <input type="submit" name="login" value="Inloggen" />

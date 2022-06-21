@@ -34,7 +34,7 @@ $password = htmlspecialchars($_SESSION["login-password"] ?? "");
     <?php endif ?>
 
     <label>Pincode
-        <input type="number" name="pincode" placeholder="Pincode" onfocus="this.select()" required />
+        <input type="number" name="pincode" placeholder="Pincode" autofocus required />
     </label>
 
     <button type="submit" name="login">Aanmelden</button>

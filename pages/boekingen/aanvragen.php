@@ -8,10 +8,12 @@ $trips = Trip::getAll();
 <div class="page-wrapper">
     <form class="form" method="POST">
         <header>Boeking aanvragen</header>
+
         <label>
             <header>Startdatum:</header>
-            <input type="date" name="date">
+            <input type="date" name="date" autofocus required>
         </label>
+
         <label>
             <header>Tocht:</header>
             <select name="tripID">

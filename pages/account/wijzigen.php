@@ -56,17 +56,17 @@ if (isset($_POST["edit"])) {
 
         <label>
             <header>Naam:</header>
-            <input type="text" name="name" value="<?= htmlspecialchars($customer->getName()) ?>" onfocus="this.select()" required />
+            <input type="text" name="name" value="<?= htmlspecialchars($customer->getName()) ?>" autofocus required />
         </label>
 
         <label>
             <header>E-mailadres:</header>
-            <input type="email" name="email" value="<?= htmlspecialchars($customer->getEmail()) ?>" onfocus="this.select()" required />
+            <input type="email" name="email" value="<?= htmlspecialchars($customer->getEmail()) ?>" required />
         </label>
 
         <label>
             <header>Telefoon:</header>
-            <input type="tel" name="phonenumber" value="<?= htmlspecialchars($customer->getPhonenumber()) ?>" onfocus="this.select()" required />
+            <input type="tel" name="phonenumber" value="<?= htmlspecialchars($customer->getPhonenumber()) ?>" required />
         </label>
 
         <label>

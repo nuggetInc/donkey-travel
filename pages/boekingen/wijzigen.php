@@ -49,7 +49,7 @@ if (isset($_POST["edit"])) {
 
         <label>
             <header>Startdatum:</header>
-            <input type="date" name="date" value="<?= date("Y-m-d", $_SESSION["date"] ?? $reservation->getStartDate()) ?>" />
+            <input type="date" name="date" value="<?= date("Y-m-d", $_SESSION["date"] ?? $reservation->getStartDate()) ?>" autofocus required />
         </label>
 
         <label>
