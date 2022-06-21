@@ -39,6 +39,7 @@ function getPDO(): PDO
         case "inloggen":
         case "registreren":
         case "uitloggen":
+        case "beheer":
         case "map":
             require("pages/{$path[0]}.php");
             break;
