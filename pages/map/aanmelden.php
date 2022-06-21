@@ -8,7 +8,7 @@ if (isset($_POST["login"])) {
 
     if ($reservation = Reservation::getByPincode((int)$pincode)) {
         $date = strtotime(date("d-m-Y"));
-        if ($reservation->getStartDate() < $date || $reservation->getEndDate() >= $date) {
+        if ($reservation->isActive()) {
             header("Location: " . ROOT_DIR . "map?pincode=$pincode&route=" . $reservation->getTrip()->getRoute());
             exit;
         }
