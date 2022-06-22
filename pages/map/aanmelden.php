@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 // Only run logic if form is sumbitted
 if (isset($_POST["login"])) {
-    $pincode = $_POST["pincode"];
+    $pincode = (int)$_POST["pincode"];
 
-    if ($reservation = Reservation::getByPincode((int)$pincode)) {
+    if ($reservation = Reservation::getByPincode($pincode)) {
         $date = strtotime(date("d-m-Y"));
         if ($reservation->isActive()) {
             header("Location: " . ROOT_DIR . "map?pincode=$pincode&route=" . $reservation->getTrip()->getRoute());
@@ -18,12 +18,13 @@ if (isset($_POST["login"])) {
         $_SESSION["error"] = "De pincode is incorrect";
     }
 
+    $_SESSION["pincode"] = $pincode;
+
     header("Location: " . ROOT_DIR . "map");
     exit;
 }
 
-$email = htmlspecialchars($_SESSION["login-email"] ?? "");
-$password = htmlspecialchars($_SESSION["login-password"] ?? "");
+$pincode = $_SESSION["pincode"] ?? "";
 
 ?>
 <header class="page-header">
@@ -39,7 +40,7 @@ $password = htmlspecialchars($_SESSION["login-password"] ?? "");
 
         <label>
             <header>Pincode</header>
-            <input type="number" name="pincode" placeholder="Pincode" autofocus required />
+            <input type="number" name="pincode" value="<?= $pincode ?>" placeholder="Pincode" autofocus required />
         </label>
 
         <input type="submit" name="login" value="Aanmelden" />
@@ -47,6 +48,7 @@ $password = htmlspecialchars($_SESSION["login-password"] ?? "");
 </div>
 <?php
 
+unset($_SESSION["pincode"]);
 unset($_SESSION["error"]);
 
 ?>
