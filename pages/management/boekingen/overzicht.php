@@ -18,7 +18,7 @@ $reservations = Reservation::getAll();
                 <th>E-mail</th>
                 <th>Telefoon</th>
                 <th>
-                    <a href="<?= ROOT_DIR ?>management/boekingen/overzicht">G</a>
+                    <a class="link" href="<?= ROOT_DIR ?>management/boekingen/overzicht">G</a>
                 </th>
             </tr>
         </thead>
@@ -36,12 +36,12 @@ $reservations = Reservation::getAll();
                     <td><?= $reservation->getStatus()->getStatus() ?></td>
                     <td>
                         <?php if ($reservation->getPincode() !== 0) : ?>
-                            <a href="<?= ROOT_DIR ?>map?pincode=<?= $reservation->getPincode() ?>&route=<?= $trip->getRoute() ?>&VGT"><?= $reservation->getPincode() ?></a>
+                            <a class="link" href="<?= ROOT_DIR ?>map?pincode=<?= $reservation->getPincode() ?>&route=<?= $trip->getRoute() ?>&VGT"><?= $reservation->getPincode() ?></a>
                         <?php endif ?>
                     </td>
                     <td><?= $customer->getName() ?></td>
                     <td>
-                        <a href="<?= ROOT_DIR ?>map?route=<?= $trip->getRoute() ?>&VGT"><?= $trip->getRoute() ?></a>
+                        <a class="link" href="<?= ROOT_DIR ?>map?route=<?= $trip->getRoute() ?>&VGT"><?= $trip->getRoute() ?></a>
                     </td>
                     <td><?= $customer->getEmail() ?></td>
                     <td><?= $customer->getPhonenumber() ?></td>
