@@ -9,19 +9,19 @@ if (isset($_GET["id"])) {
 switch ($path[2] ?? null) {
     case "overzicht":
     case "aanvragen":
-        require("pages/beheer/boekingen/{$path[2]}.php");
+        require("pages/management/boekingen/{$path[2]}.php");
         break;
     case "wijzigen":
     case "verwijderen":
         if (isset($reservation))
-            require("pages/beheer/boekingen/{$path[2]}.php");
+            require("pages/management/boekingen/{$path[2]}.php");
         else
-            require("pages/beheer/boekingen/overzicht.php");
+            require("pages/management/boekingen/overzicht.php");
         break;
     default:
         if (isset($reservation))
-            require("pages/beheer/boekingen/bekijken.php");
+            require("pages/management/boekingen/bekijken.php");
         else
-            require("pages/beheer/boekingen/overzicht.php");
+            require("pages/management/boekingen/overzicht.php");
         break;
 }

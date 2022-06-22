@@ -12,7 +12,7 @@ if (isset($_POST["edit"])) {
 
     $reservation = Reservation::update($id, $date, $pincode, $tripID, $customerID, $statusID);
 
-    header("Location: " . ROOT_DIR . "beheer/boekingen");
+    header("Location: " . ROOT_DIR . "management/boekingen");
     exit;
 }
 
@@ -45,7 +45,7 @@ if (isset($_POST["edit"])) {
 
         <input type="submit" name="edit" value="Wijzigen" />
 
-        <footer><a class="link" title="Annuleer wijzigingen" href="<?= ROOT_DIR ?>beheer/boekingen/bekijken?id=<?= $_GET["id"] ?>">Annuleren</a></footer>
+        <footer><a class="link" title="Annuleer wijzigingen" href="<?= ROOT_DIR ?>management/boekingen/bekijken?id=<?= $_GET["id"] ?>">Annuleren</a></footer>
     </form>
 </div>
 <?php

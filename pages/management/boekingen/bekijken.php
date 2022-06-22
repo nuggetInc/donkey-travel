@@ -20,9 +20,9 @@ declare(strict_types=1);
         </label>
 
         <footer>
-            <a class="link" title="Wijzig deze boeking" href="<?= ROOT_DIR ?>beheer/boekingen/wijzigen?id=<?= $_GET["id"] ?>">Wijzigen</a>
-            <a class="link" title="Verwijder deze boeking" href="<?= ROOT_DIR ?>beheer/boekingen/verwijderen?id=<?= $_GET["id"] ?>">Verwijderen</a>
-            <a class="link" title="Ga terug naar overzicht" href="<?= ROOT_DIR ?>beheer/boekingen/overzicht">Terug</a>
+            <a class="link" title="Wijzig deze boeking" href="<?= ROOT_DIR ?>management/boekingen/wijzigen?id=<?= $_GET["id"] ?>">Wijzigen</a>
+            <a class="link" title="Verwijder deze boeking" href="<?= ROOT_DIR ?>management/boekingen/verwijderen?id=<?= $_GET["id"] ?>">Verwijderen</a>
+            <a class="link" title="Ga terug naar overzicht" href="<?= ROOT_DIR ?>management/boekingen/overzicht">Terug</a>
         </footer>
     </form>
 </div>

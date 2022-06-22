@@ -18,7 +18,7 @@ $reservations = Reservation::getAll();
                 <th>E-mail</th>
                 <th>Telefoon</th>
                 <th>
-                    <a href="<?= ROOT_DIR ?>beheer/boekingen/overzicht">G</a>
+                    <a href="<?= ROOT_DIR ?>management/boekingen/overzicht">G</a>
                 </th>
             </tr>
         </thead>
@@ -46,7 +46,7 @@ $reservations = Reservation::getAll();
                     <td><?= $customer->getEmail() ?></td>
                     <td><?= $customer->getPhonenumber() ?></td>
                     <td>
-                        <a class="link" title="Boeking bekijken" href="<?= ROOT_DIR ?>beheer/boekingen/bekijken?id=<?= $id ?>">...</a>
+                        <a class="link" title="Boeking bekijken" href="<?= ROOT_DIR ?>management/boekingen/bekijken?id=<?= $id ?>">...</a>
                     </td>
                 </tr>
             <?php endforeach ?>
