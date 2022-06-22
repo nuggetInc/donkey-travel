@@ -26,19 +26,22 @@ $email = htmlspecialchars($_SESSION["login-email"] ?? "");
 $password = htmlspecialchars($_SESSION["login-password"] ?? "");
 
 ?>
-<form method="POST">
-    <h1>Mijn Donkey Travel inloggen</h1>
+<div class="page-wrapper">
+    <form class="form" method="POST">
+        <header>Mijn Donkey Travel inloggen</header>
 
-    <?php if (isset($_SESSION["error"])) : ?>
-        <p><?= $_SESSION["error"] ?></p>
-    <?php endif ?>
+        <?php if (isset($_SESSION["error"])) : ?>
+            <p class="error"><?= $_SESSION["error"] ?></p>
+        <?php endif ?>
 
-    <label>Pincode
-        <input type="number" name="pincode" placeholder="Pincode" autofocus required />
-    </label>
+        <label>
+            <header>Pincode</header>
+            <input type="number" name="pincode" placeholder="Pincode" autofocus required />
+        </label>
 
-    <button type="submit" name="login">Aanmelden</button>
-</form>
+        <input type="submit" name="login" value="Aanmelden" />
+    </form>
+</div>
 <?php
 
 unset($_SESSION["error"]);
