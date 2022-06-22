@@ -34,7 +34,7 @@ switch ($path[1] ?? null) {
         break;
     case "wijzigen":
     case "verwijderen":
-        if (isset($reservation))
+        if (isset($reservation) && !$reservation->isDefinitive())
             require("pages/boekingen/{$path[1]}.php");
         else
             require("pages/boekingen/overzicht.php");

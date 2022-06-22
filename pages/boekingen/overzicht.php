@@ -39,7 +39,7 @@ if (isset($_POST["request"])) {
                     <td><?= date("d-m-Y", $reservation->getStartDate()) ?></td>
                     <td><?= date("d-m-Y", $reservation->getEndDate()) ?></td>
                     <td>
-                        <?php if ($reservation->getStatus()->getStatus() == "Definitief" && $reservation->isActive()) : ?>
+                        <?php if ($reservation->isDefinitive() && $reservation->isActive()) : ?>
                             <form method="POST">
                                 <input type="hidden" name="reservationID" value="<?= $id ?>">
                                 <?php if ($reservation->getPincode() == 0) : ?>

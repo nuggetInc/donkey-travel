@@ -39,6 +39,11 @@ class Reservation
         return $this->getStartDate() <= $date && $this->getEndDate() > $date;
     }
 
+    public function isDefinitive(): bool
+    {
+        return $this->getStatusID() == 2;
+    }
+
     public function getPincode(): int
     {
         return $this->pincode;
