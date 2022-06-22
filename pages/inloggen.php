@@ -19,15 +19,14 @@ if (isset($_POST["login"])) {
     $_SESSION["error"] = "Het E-mailadres of het wachtwoord is incorrect";
     // Reaching here means the email or password is incorrect 
 
-    $_SESSION["login-email"] = $email;
-    $_SESSION["login-password"] = $password;
+    $_SESSION["email"] = $email;
+    $_SESSION["password"] = $password;
 
     header("Location: " . ROOT_DIR);
     exit;
 }
 
-$email = htmlspecialchars($_SESSION["login-email"] ?? "");
-$password = htmlspecialchars($_SESSION["login-password"] ?? "");
+$email = htmlspecialchars($_SESSION["email"] ?? "");
 
 ?>
 <header class="page-header"><span class="logo">Donkey<span class="green">Travel</span></span></header>
@@ -41,7 +40,7 @@ $password = htmlspecialchars($_SESSION["login-password"] ?? "");
 
         <label>
             <header>E-mailadres</header>
-            <input type="email" name="email" placeholder="E-mailadres" value="<?= htmlspecialchars($email) ?>" autofocus required />
+            <input type="email" name="email" placeholder="E-mailadres" value="<?= $email ?>" autofocus required />
         </label>
 
         <label>
@@ -61,7 +60,7 @@ $password = htmlspecialchars($_SESSION["login-password"] ?? "");
 <?php
 
 unset($_SESSION["error"]);
-unset($_SESSION["login-email"]);
-unset($_SESSION["login-password"]);
+unset($_SESSION["email"]);
+unset($_SESSION["password"]);
 
 ?>
