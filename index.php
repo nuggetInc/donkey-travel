@@ -29,7 +29,10 @@ function getPDO(): PDO
 <html>
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="<?= PUBLIC_DIR ?>css/style.css" />
+    <link rel="stylesheet" href="<?= PUBLIC_DIR ?>css/header.css" />
+    <link rel="stylesheet" href="<?= PUBLIC_DIR ?>css/form.css" />
     <title>Donkey Travel</title>
 </head>
 

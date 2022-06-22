@@ -1,0 +1,51 @@
+.form {
+    min-width: 15em;
+    width: 40vmin;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.form>header {
+    text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.form .error {
+    color: red;
+}
+
+.form label {
+    display: flex;
+    flex-direction: column;
+}
+
+.form label>header {
+    margin-left: 1em;
+    font-weight: bold;
+}
+
+.form input,
+.form select {
+    padding: .5em 1em;
+
+    border: solid 2px green;
+    border-radius: 1em;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1em;
+    outline-offset: 2px;
+}
+
+.form input[type="submit"] {
+    background-color: green;
+
+    color: white;
+    font-weight: bold;
+}
+
+.form>footer {
+    text-align: center;
+}
