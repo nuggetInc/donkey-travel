@@ -28,7 +28,7 @@ $pincode = $_SESSION["pincode"] ?? "";
 
 ?>
 <header class="page-header">
-    <a class="logo" href="<?= ROOT_DIR ?>">Donkey<span class="green">Tracker</span></a>
+    <a class="logo" href="<?= ROOT_DIR ?>map">Donkey<span class="green">Tracker</span></a>
 </header>
 <div class="page-wrapper">
     <form class="form" method="POST">

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 ?>
 <header class="page-header">
-    <a class="logo" href="<?= ROOT_DIR ?>">Donkey<span class="green">Manager</span></a>
+    <a class="logo" href="<?= ROOT_DIR ?>management">Donkey<span class="green">Manager</span></a>
     <ul class="nav">
         <li><a class="link" title="Beheer boekingen" href="<?= ROOT_DIR ?>management/boekingen">Uitloggen</a></li>
         <li><a class="link" title="Beheer gasten" href="<?= ROOT_DIR ?>management/beheer">Uitloggen</a></li>
