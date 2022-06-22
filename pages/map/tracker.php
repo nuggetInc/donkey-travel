@@ -4,7 +4,13 @@ $pincode = $_GET["pincode"] ?? 0;
 $route = $_GET["route"] ?? null;
 $viewguesttrackers = isset($_GET["VGT"]) ? "true" : "false";
 
-if (isset($_GET["pincode"]) && !Reservation::getByPincode((int)$_GET["pincode"])->isActive()) {
+if ($reservation = Reservation::getByPincode((int)$pincode)) {
+     if (!isset($route))
+          $route = $reservation->getTrip()->getRoute();
+
+     if (!$reservation->isActive())
+          $pincode = 0;
+} else {
      $pincode = 0;
 }
 
