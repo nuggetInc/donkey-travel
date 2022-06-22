@@ -4,13 +4,6 @@ declare(strict_types=1);
 
 if (isset($_GET["id"])) {
     $reservation = Reservation::get((int)$_GET["id"]);
-
-    if (
-        !isset($reservation) ||
-        $reservation->getCustomerID() !== $_SESSION["customerID"]
-    ) {
-        unset($reservation);
-    }
 }
 
 switch ($path[2] ?? null) {

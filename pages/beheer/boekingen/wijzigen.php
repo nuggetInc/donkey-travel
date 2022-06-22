@@ -10,16 +10,6 @@ if (isset($_POST["edit"])) {
     $customerID = $_SESSION["customerID"];
     $statusID = $reservation->getStatusID();
 
-    if ($date <= strtotime(date("Y-m-d"))) {
-        $_SESSION["error"] = "De datum moet na vandaag zijn";
-
-        $_SESSION["date"] = $date;
-        $_SESSION["tripID"] = $tripID;
-
-        header("Location: " . ROOT_DIR . "beheer/boekingen/wijzigen?id={$id}");
-        exit;
-    }
-
     $reservation = Reservation::update($id, $date, $pincode, $tripID, $customerID, $statusID);
 
     header("Location: " . ROOT_DIR . "beheer/boekingen");
