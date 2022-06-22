@@ -8,7 +8,7 @@ declare(strict_types=1);
         <header>Account wijzigen</header>
 
         <?php if (isset($_SESSION["error"])) : ?>
-            <p><?= $_SESSION["error"] ?></p>
+            <p class="error"><?= $_SESSION["error"] ?></p>
         <?php endif ?>
 
         <label>

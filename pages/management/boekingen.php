@@ -13,6 +13,8 @@ switch ($path[2] ?? null) {
         break;
     case "wijzigen":
     case "verwijderen":
+    case "pauzeplaatsen":
+    case "overnachtingen":
         if (isset($reservation))
             require("pages/management/boekingen/{$path[2]}.php");
         else
