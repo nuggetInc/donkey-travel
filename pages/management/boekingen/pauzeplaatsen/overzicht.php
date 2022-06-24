@@ -99,4 +99,5 @@ foreach ($breakspots as $id => $breakspot)
             <?php endforeach ?>
         </tbody>
     </table>
+    <a class="link" title="Ga terug naar boekingen" href="<?= ROOT_DIR ?>management/boekingen">Terug</a>
 </div>

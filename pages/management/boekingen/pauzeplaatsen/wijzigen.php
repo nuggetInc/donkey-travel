@@ -14,7 +14,7 @@ $restaurant = Restaurant::get($breakspot->getRestaurantID());
 ?>
 <div class="page-wrapper">
     <form class="form" method="POST">
-        <header>Boeking wijzigen</header>
+        <header>Pauzeplaats wijzigen</header>
 
         <?php if (isset($_SESSION["error"])) : ?>
             <p class="error"><?= $_SESSION["error"] ?></p>
