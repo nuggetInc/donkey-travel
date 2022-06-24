@@ -65,6 +65,20 @@ class Breakspot
         return null;
     }
 
+    public static function getByReservation(int $reservationID): array
+    {
+        $params = array(":reservationID" => $reservationID);
+        $sth = getPDO()->prepare("SELECT `id`, `restaurant_id`, `status_id` FROM `breakspots` WHERE `reservation_id` = :reservationID;");
+        $sth->execute($params);
+
+        $breakspots = array();
+
+        if ($row = $sth->fetch())
+            $breakspots[$row["id"]] = new Breakspot($row["id"], $reservationID, $row["restaurant_id"], $row["status_id"]);
+
+        return $breakspots;
+    }
+
     public static function create(int $reservationID, int $restaurantID, int $statusID)
     {
         $params = array(

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 if (isset($_POST["edit"])) {
-    $id = (int)$_GET["id"];
+    $id = (int)$_GET["boeking"];
     $date = strtotime($_POST["date"]);
     $pincode = $reservation->getPincode();
     $tripID = (int)$_POST["tripID"];
@@ -45,7 +45,7 @@ if (isset($_POST["edit"])) {
 
         <input type="submit" name="edit" value="Wijzigen" />
 
-        <footer><a class="link" title="Annuleer wijzigingen" href="<?= ROOT_DIR ?>management/boekingen/bekijken?id=<?= $_GET["id"] ?>">Annuleren</a></footer>
+        <footer><a class="link" title="Annuleer wijzigingen" href="<?= ROOT_DIR ?>management/boekingen/bekijken?boeking=<?= $_GET["boeking"] ?>">Annuleren</a></footer>
     </form>
 </div>
 <?php

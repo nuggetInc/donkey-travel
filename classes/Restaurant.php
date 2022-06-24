@@ -55,13 +55,26 @@ class Restaurant
     public static function get(int $id): ?Restaurant
     {
         $params = array(":id" => $id);
-        $sth = getPDO()->prepare("SELECT `id`, `name`, `address`, `email`, `phonenumber`, `coordinates` FROM `restaurants` WHERE `id` = :id LIMIT 1;");
+        $sth = getPDO()->prepare("SELECT `name`, `address`, `email`, `phonenumber`, `coordinates` FROM `restaurants` WHERE `id` = :id LIMIT 1;");
         $sth->execute($params);
 
         if ($row = $sth->fetch())
             return new Restaurant($id, $row["name"], $row["address"], $row["email"], $row["phonenumber"], $row["coordinates"]);
 
         return null;
+    }
+
+    public static function getAll(): array
+    {
+        $sth = getPDO()->prepare("SELECT `id`, `name`, `address`, `email`, `phonenumber`, `coordinates` FROM `restaurants`;");
+        $sth->execute();
+
+        $restaurant = array();
+
+        if ($row = $sth->fetch())
+            $restaurant[$row["id"]] = new Restaurant($row["id"], $row["name"], $row["address"], $row["email"], $row["phonenumber"], $row["coordinates"]);
+
+        return $restaurant;
     }
 
     public static function create(string $name, string $address, string $email, string $phonenumber, string $coordinates)

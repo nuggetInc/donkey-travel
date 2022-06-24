@@ -40,8 +40,8 @@ declare(strict_types=1);
 
 
         <footer>
-            <a class="link" title="Wijzig deze boeking" href="<?= ROOT_DIR ?>management/boekingen/wijzigen?id=<?= $_GET["id"] ?>">Wijzigen</a>
-            <a class="link" title="Verwijder deze boeking" href="<?= ROOT_DIR ?>management/boekingen/verwijderen?id=<?= $_GET["id"] ?>">Verwijderen</a>
+            <a class="link" title="Wijzig deze boeking" href="<?= ROOT_DIR ?>management/boekingen/wijzigen?boeking=<?= $_GET["boeking"] ?>">Wijzigen</a>
+            <a class="link" title="Verwijder deze boeking" href="<?= ROOT_DIR ?>management/boekingen/verwijderen?boeking=<?= $_GET["boeking"] ?>">Verwijderen</a>
             <a class="link" title="Ga terug naar overzicht" href="<?= ROOT_DIR ?>management/boekingen/overzicht">Terug</a>
         </footer>
     </form>
