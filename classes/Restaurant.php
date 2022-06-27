@@ -71,7 +71,7 @@ class Restaurant
 
         $restaurant = array();
 
-        if ($row = $sth->fetch())
+        while ($row = $sth->fetch())
             $restaurant[$row["id"]] = new Restaurant($row["id"], $row["name"], $row["address"], $row["email"], $row["phonenumber"], $row["coordinates"]);
 
         return $restaurant;

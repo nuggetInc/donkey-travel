@@ -11,12 +11,12 @@ $restaurant = Restaurant::get($breakspot->getRestaurantID());
 
         <label>
             <header>Restaurant:</header>
-            <input type="text" value="<?= $restaurant->getName() ?>" disabled />
+            <input type="text" value="<?= htmlspecialchars($restaurant->getName()) ?>" disabled />
         </label>
 
         <label>
             <header>Adres:</header>
-            <input type="text" value="<?= $restaurant->getAddress() ?>" disabled />
+            <input type="text" value="<?= htmlspecialchars($restaurant->getAddress()) ?>" disabled />
         </label>
 
         <label>

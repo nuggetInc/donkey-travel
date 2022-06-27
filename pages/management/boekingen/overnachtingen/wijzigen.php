@@ -9,12 +9,12 @@ if (isset($_POST["edit"])) {
     exit;
 }
 
-$restaurant = Restaurant::get($breakspot->getRestaurantID());
+$inn = Inn::get($overnightStay->getInnID());
 
 ?>
 <div class="page-wrapper">
     <form class="form" method="POST">
-        <header>Pauzeplaats wijzigen</header>
+        <header>Overnachtingsplaats wijzigen</header>
 
         <?php if (isset($_SESSION["error"])) : ?>
             <p class="error"><?= $_SESSION["error"] ?></p>
@@ -24,7 +24,7 @@ $restaurant = Restaurant::get($breakspot->getRestaurantID());
             <header>Status:</header>
             <select name="statusID">
                 <?php foreach (Status::getAll() as $id => $status) : ?>
-                    <?php if ($id === $breakspot->getStatusID()) : ?>
+                    <?php if ($id === $overnightStay->getStatusID()) : ?>
                         <option value="<?= $id ?>" selected><?= htmlspecialchars($status->getStatus()) ?></option>
                     <?php else : ?>
                         <option value="<?= $id ?>"><?= htmlspecialchars($status->getStatus()) ?></option>
@@ -35,7 +35,7 @@ $restaurant = Restaurant::get($breakspot->getRestaurantID());
 
         <input type="submit" name="edit" value="Wijzigen" />
 
-        <footer><a class="link" title="Annuleer wijzigingen" href="<?= ROOT_DIR ?>management/boekingen/pauzeplaatsen/bekijken?boeking=<?= $_GET["boeking"] ?>&pauzeplek=<?= $_GET["pauzeplek"] ?>">Annuleren</a></footer>
+        <footer><a class="link" title="Annuleer wijzigingen" href="<?= ROOT_DIR ?>management/boekingen/overnachtingen/bekijken?boeking=<?= $_GET["boeking"] ?>&overnachting=<?= $_GET["overnachting"] ?>">Annuleren</a></footer>
     </form>
 </div>
 <?php

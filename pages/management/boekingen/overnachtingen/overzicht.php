@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-$breakspots = Breakspot::getByReservation($reservation->getID());
-$restaurants = Restaurant::getAll();
+$overnightStays = OvernightStay::getByReservation($reservation->getID());
+$inns = Inn::getAll();
 
 if (isset($_POST["add"])) {
-    Breakspot::create($reservation->getID(), (int)$_POST["restaurantID"], 3);
+    OvernightStay::create($reservation->getID(), (int)$_POST["innID"], 3);
 
     header("Location: " . ROOT_DIR . "management/boekingen/pauzeplaatsen?boeking=" . $reservation->getID());
     exit;
 }
 
-foreach ($breakspots as $id => $breakspot)
-    unset($restaurants[$breakspot->getRestaurantID()]);
+foreach ($overnightStays as $id => $overnightStay)
+    unset($inns[$overnightStay->getInnID()]);
 
 ?>
 <div class="page-wrapper">
@@ -53,24 +53,24 @@ foreach ($breakspots as $id => $breakspot)
     <table>
         <thead>
             <tr>
-                <th>Restaurant</th>
+                <th>Herberg</th>
                 <th>Adres</th>
                 <th>Status</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($breakspots as $id => $breakspot) : ?>
+            <?php foreach ($overnightStays as $id => $overnightStay) : ?>
                 <?php
 
-                $restaurant = $breakspot->getRestaurant();
+                $inn = $overnightStay->getInn();
 
                 ?>
                 <tr>
-                    <td><?= $restaurant->getName() ?></td>
-                    <td><?= $restaurant->getAddress() ?></td>
-                    <td><?= $breakspot->getStatus()->getStatus() ?></td>
-                    <td><a class="link" title="Pauzeplek bekijken" href="<?= ROOT_DIR ?>management/boekingen/pauzeplaatsen/bekijken?boeking=<?= $_GET["boeking"] ?>&pauzeplek=<?= $id ?>">...</a></td>
+                    <td><?= $inn->getName() ?></td>
+                    <td><?= $inn->getAddress() ?></td>
+                    <td><?= $inn->getStatus()->getStatus() ?></td>
+                    <td><a class="link" title="Pauzeplek bekijken" href="<?= ROOT_DIR ?>management/boekingen/overnachtingen/bekijken?boeking=<?= $_GET["boeking"] ?>&overnachting=<?= $id ?>">...</a></td>
                 </tr>
             <?php endforeach ?>
         </tbody>
@@ -79,20 +79,20 @@ foreach ($breakspots as $id => $breakspot)
     <table>
         <thead>
             <tr>
-                <th>Restaurant</th>
+                <th>Herberg</th>
                 <th>Adres</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($restaurants as $id => $restaurant) : ?>
+            <?php foreach ($inns as $id => $inn) : ?>
                 <tr>
-                    <td><?= $restaurant->getName() ?></td>
-                    <td><?= $restaurant->getAddress() ?></td>
+                    <td><?= $inn->getName() ?></td>
+                    <td><?= $inn->getAddress() ?></td>
                     <td>
                         <form action="?boeking=<?= $reservation->getID() ?>" method="POST">
-                            <input type="hidden" name="restaurantID" value="<?= $id ?>">
-                            <input class="link" title="Pauzeplek toevoegen" type="submit" name="add" value="+">
+                            <input type="hidden" name="innID" value="<?= $id ?>">
+                            <input class="link" title="Overnachting toevoegen" type="submit" name="add" value="+">
                         </form>
                     </td>
                 </tr>
