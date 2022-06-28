@@ -24,7 +24,9 @@ if (isset($_POST['register'])) {
     $password =  password_hash($_POST["password"], PASSWORD_DEFAULT);
     customer::create($_POST["name"], $_POST["email"], $_POST["phonenumber"], $password);
 
-    header('Location: ' . ROOT_DIR . 'inloggen');
+    $_SESSION["customerID"] = (int)getPDO()->lastInsertId();
+
+    header('Location: ' . ROOT_DIR);
     exit;
 }
 

@@ -26,8 +26,6 @@ declare(strict_types=1);
             <input type="tel" name="phonenumber" value="<?= htmlspecialchars($customer->getPhonenumber()) ?>" disabled />
         </label>
 
-        <input type="submit" name="edit" value="Bewaren" />
-
         <footer>
             <a class="link" title="Wijzig dit account" href="<?= ROOT_DIR ?>account/wijzigen">Wijzigen</a>
             <a class="link" title="Verwijder dit account" href="<?= ROOT_DIR ?>account/verwijderen">Verwijderen</a>
