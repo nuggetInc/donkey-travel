@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-if (isset($_GET["id"])) {
-    $reservation = Reservation::get((int)$_GET["id"]);
+if (isset($_GET["boeking"])) {
+    $reservation = Reservation::get((int)$_GET["boeking"]);
 }
 
 switch ($path[2] ?? null) {
@@ -11,8 +11,11 @@ switch ($path[2] ?? null) {
     case "aanvragen":
         require("pages/management/boekingen/{$path[2]}.php");
         break;
+    case "bekijken":
     case "wijzigen":
     case "verwijderen":
+    case "pauzeplaatsen":
+    case "overnachtingen":
         if (isset($reservation))
             require("pages/management/boekingen/{$path[2]}.php");
         else

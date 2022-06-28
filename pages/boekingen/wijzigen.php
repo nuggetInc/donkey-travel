@@ -32,7 +32,7 @@ if (isset($_POST["edit"])) {
         <header>Boeking wijzigen</header>
 
         <?php if (isset($_SESSION["error"])) : ?>
-            <p><?= $_SESSION["error"] ?></p>
+            <p class="error"><?= $_SESSION["error"] ?></p>
         <?php endif ?>
 
         <label>

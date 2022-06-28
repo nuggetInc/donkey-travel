@@ -39,10 +39,10 @@ if (isset($_POST["request"])) {
                     <td><?= date("d-m-Y", $reservation->getStartDate()) ?></td>
                     <td><?= date("d-m-Y", $reservation->getEndDate()) ?></td>
                     <td>
-                        <?php if ($reservation->isDefinitive() && $reservation->isActive()) : ?>
+                        <?php if ($reservation->isDefinitive() && ($reservation->getPincode() !== 0 || $reservation->isActive())) : ?>
                             <form method="POST">
                                 <input type="hidden" name="reservationID" value="<?= $id ?>">
-                                <?php if ($reservation->getPincode() == 0) : ?>
+                                <?php if ($reservation->getPincode() === 0) : ?>
                                     <input class="link" title="PIN code aanvragen" type="submit" name="request" value="PIN Code aanvragen">
                                 <?php else : ?>
                                     <input class="link" title="PIN code verwijderen" type="submit" name="delete" value="<?= $reservation->getPincode() . " x" ?>">
@@ -51,7 +51,7 @@ if (isset($_POST["request"])) {
                         <?php endif ?>
                     </td>
                     <td>
-                        <?php if ($reservation->getPincode() == 0) : ?>
+                        <?php if ($reservation->getPincode() == 0 || !$reservation->isActive()) : ?>
                             <a class="link" title="Tocht bekijken" href="<?= ROOT_DIR ?>map?route=<?= $reservation->getTrip()->getRoute() ?>">
                                 <?= $reservation->getTrip()->getRoute() ?>
                             </a>

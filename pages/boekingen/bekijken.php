@@ -10,12 +10,12 @@ declare(strict_types=1);
 
         <label>
             <header>Startdatum:</header>
-            <input type="date" name="date" value="<?= date("Y-m-d", $reservation->getStartDate()) ?>" disabled />
+            <input type="date" value="<?= date("Y-m-d", $reservation->getStartDate()) ?>" disabled />
         </label>
 
         <label>
             <header>Tocht:</header>
-            <select name="tripID" disabled>
+            <select disabled>
                 <option><?= htmlspecialchars($reservation->getTrip()->getRoute()) ?></option>
             </select>
         </label>

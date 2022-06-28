@@ -2,8 +2,12 @@
 
 declare(strict_types=1);
 
+require_once("classes/Breakspots.php");
 require_once("classes/Customer.php");
+require_once("classes/Inn.php");
+require_once("classes/OvernightStay.php");
 require_once("classes/Reservation.php");
+require_once("classes/Restaurant.php");
 require_once("classes/Status.php");
 require_once("classes/Tracker.php");
 require_once("classes/Trip.php");

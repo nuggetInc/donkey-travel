@@ -69,6 +69,8 @@ $email = htmlspecialchars($_SESSION["email"] ?? "");
         </label>
 
         <input type="submit" name="register" value="Registreren" />
+
+        <footer><a class="link" title="Annuleer registratie" href="<?= ROOT_DIR ?>inloggen">Annuleren</a></footer>
     </form>
 </div>
 <?php

@@ -4,7 +4,13 @@ $pincode = $_GET["pincode"] ?? 0;
 $route = $_GET["route"] ?? null;
 $viewguesttrackers = isset($_GET["VGT"]) ? "true" : "false";
 
-if (isset($_GET["pincode"]) && !Reservation::getByPincode((int)$_GET["pincode"])->isActive()) {
+if ($reservation = Reservation::getByPincode((int)$pincode)) {
+     if (!isset($route))
+          $route = $reservation->getTrip()->getRoute();
+
+     if (!$reservation->isActive())
+          $pincode = 0;
+} else {
      $pincode = 0;
 }
 
@@ -13,7 +19,7 @@ if (isset($_GET["pincode"]) && !Reservation::getByPincode((int)$_GET["pincode"])
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.14.1/build/ol.js"></script>
 <header class="page-header">
-     <a class="logo" href="<?= ROOT_DIR ?>">Donkey<span class="green">Tracker</span></a>
+     <a class="logo" href="<?= ROOT_DIR ?>map">Donkey<span class="green">Tracker</span></a>
      <div id="status">
           <span id="tijd"></span>
           <span id="messages"></span>

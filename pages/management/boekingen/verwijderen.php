@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 if (isset($_POST["delete"])) {
-    Reservation::delete((int)$_GET["id"]);
+    Reservation::delete((int)$_GET["boeking"]);
 
     header("Location: " . ROOT_DIR . "management/boekingen");
     exit;
@@ -33,6 +33,6 @@ if (isset($_POST["delete"])) {
 
         <input type="submit" name="delete" value="Verwijderen" />
 
-        <footer><a class="link" title="Annuleer Verwijdering" href="<?= ROOT_DIR ?>management/boekingen/bekijken?id=<?= $_GET["id"] ?>">Annuleren</a></footer>
+        <footer><a class="link" title="Annuleer Verwijdering" href="<?= ROOT_DIR ?>management/boekingen/bekijken?boeking=<?= $_GET["boeking"] ?>">Annuleren</a></footer>
     </form>
 </div>

@@ -21,6 +21,11 @@ class Reservation
         $this->statusID = $statusID;
     }
 
+    public function getID(): int
+    {
+        return $this->id;
+    }
+
     public function getStartDate(): int
     {
         return $this->startDate;
