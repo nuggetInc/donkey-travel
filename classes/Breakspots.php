@@ -73,7 +73,7 @@ class Breakspot
 
         $breakspots = array();
 
-        if ($row = $sth->fetch())
+        while ($row = $sth->fetch())
             $breakspots[$row["id"]] = new Breakspot($row["id"], $reservationID, $row["restaurant_id"], $row["status_id"]);
 
         return $breakspots;

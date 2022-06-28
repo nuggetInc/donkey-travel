@@ -73,7 +73,7 @@ class OvernightStay
 
         $overnightStays = array();
 
-        if ($row = $sth->fetch())
+        while ($row = $sth->fetch())
             $overnightStays[$row["id"]] = new OvernightStay($row["id"], $reservationID, $row["inn_id"], $row["status_id"]);
 
         return $overnightStays;
