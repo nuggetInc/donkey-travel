@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-if (isset($_POST["delete"])) {
-    Inn::delete((int)$_GET["overnachting"]);
+if (isset($_POST["delete"]))
+{
+    OvernightStay::delete((int)$_GET["overnachting"]);
 
     header("Location: " . ROOT_DIR . "management/boekingen/overnachtingen?boeking=" . $_GET["boeking"]);
     exit;

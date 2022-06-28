@@ -66,7 +66,7 @@ class Inn
 
     public static function getAll(): array
     {
-        $sth = getPDO()->prepare("SELECT `id`, `name`, `address`, `email`, `phonenumber`, `coordinates` FROM `inns` LIMIT 1;");
+        $sth = getPDO()->prepare("SELECT `id`, `name`, `address`, `email`, `phonenumber`, `coordinates` FROM `inns`;");
         $sth->execute();
 
         $inns = array();

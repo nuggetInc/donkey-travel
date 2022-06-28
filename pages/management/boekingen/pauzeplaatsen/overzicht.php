@@ -5,7 +5,8 @@ declare(strict_types=1);
 $breakspots = Breakspot::getByReservation($reservation->getID());
 $restaurants = Restaurant::getAll();
 
-if (isset($_POST["add"])) {
+if (isset($_POST["add"]))
+{
     Breakspot::create($reservation->getID(), (int)$_POST["restaurantID"], 3);
 
     header("Location: " . ROOT_DIR . "management/boekingen/pauzeplaatsen?boeking=" . $reservation->getID());
@@ -50,31 +51,33 @@ foreach ($breakspots as $id => $breakspot)
         </label>
     </form>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Restaurant</th>
-                <th>Adres</th>
-                <th>Status</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($breakspots as $id => $breakspot) : ?>
-                <?php
-
-                $restaurant = $breakspot->getRestaurant();
-
-                ?>
+    <?php if (count($breakspots) > 0) : ?>
+        <table>
+            <thead>
                 <tr>
-                    <td><?= $restaurant->getName() ?></td>
-                    <td><?= $restaurant->getAddress() ?></td>
-                    <td><?= $breakspot->getStatus()->getStatus() ?></td>
-                    <td><a class="link" title="Pauzeplek bekijken" href="<?= ROOT_DIR ?>management/boekingen/pauzeplaatsen/bekijken?boeking=<?= $_GET["boeking"] ?>&pauzeplek=<?= $id ?>">...</a></td>
+                    <th>Restaurant</th>
+                    <th>Adres</th>
+                    <th>Status</th>
+                    <th></th>
                 </tr>
-            <?php endforeach ?>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <?php foreach ($breakspots as $id => $breakspot) : ?>
+                    <?php
+
+                    $restaurant = $breakspot->getRestaurant();
+
+                    ?>
+                    <tr>
+                        <td><?= $restaurant->getName() ?></td>
+                        <td><?= $restaurant->getAddress() ?></td>
+                        <td><?= $breakspot->getStatus()->getStatus() ?></td>
+                        <td><a class="link" title="Pauzeplek bekijken" href="<?= ROOT_DIR ?>management/boekingen/pauzeplaatsen/bekijken?boeking=<?= $_GET["boeking"] ?>&pauzeplek=<?= $id ?>">...</a></td>
+                    </tr>
+                <?php endforeach ?>
+            </tbody>
+        </table>
+    <?php endif ?>
 
     <table>
         <thead>

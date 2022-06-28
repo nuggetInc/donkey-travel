@@ -5,10 +5,11 @@ declare(strict_types=1);
 $overnightStays = OvernightStay::getByReservation($reservation->getID());
 $inns = Inn::getAll();
 
-if (isset($_POST["add"])) {
+if (isset($_POST["add"]))
+{
     OvernightStay::create($reservation->getID(), (int)$_POST["innID"], 3);
 
-    header("Location: " . ROOT_DIR . "management/boekingen/pauzeplaatsen?boeking=" . $reservation->getID());
+    header("Location: " . ROOT_DIR . "management/boekingen/overnachtingen?boeking=" . $reservation->getID());
     exit;
 }
 
@@ -50,31 +51,33 @@ foreach ($overnightStays as $id => $overnightStay)
         </label>
     </form>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Herberg</th>
-                <th>Adres</th>
-                <th>Status</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($overnightStays as $id => $overnightStay) : ?>
-                <?php
-
-                $inn = $overnightStay->getInn();
-
-                ?>
+    <?php if (count($overnightStays) > 0) : ?>
+        <table>
+            <thead>
                 <tr>
-                    <td><?= $inn->getName() ?></td>
-                    <td><?= $inn->getAddress() ?></td>
-                    <td><?= $inn->getStatus()->getStatus() ?></td>
-                    <td><a class="link" title="Pauzeplek bekijken" href="<?= ROOT_DIR ?>management/boekingen/overnachtingen/bekijken?boeking=<?= $_GET["boeking"] ?>&overnachting=<?= $id ?>">...</a></td>
+                    <th>Herberg</th>
+                    <th>Adres</th>
+                    <th>Status</th>
+                    <th></th>
                 </tr>
-            <?php endforeach ?>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <?php foreach ($overnightStays as $id => $overnightStay) : ?>
+                    <?php
+
+                    $inn = $overnightStay->getInn();
+
+                    ?>
+                    <tr>
+                        <td><?= $inn->getName() ?></td>
+                        <td><?= $inn->getAddress() ?></td>
+                        <td><?= $overnightStay->getStatus()->getStatus() ?></td>
+                        <td><a class="link" title="Pauzeplek bekijken" href="<?= ROOT_DIR ?>management/boekingen/overnachtingen/bekijken?boeking=<?= $_GET["boeking"] ?>&overnachting=<?= $id ?>">...</a></td>
+                    </tr>
+                <?php endforeach ?>
+            </tbody>
+        </table>
+    <?php endif ?>
 
     <table>
         <thead>

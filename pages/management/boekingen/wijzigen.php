@@ -2,17 +2,13 @@
 
 declare(strict_types=1);
 
-echo "<pre>";
-print_r(Customer::getAll());
-echo "</pre>";
-
 if (isset($_POST["edit"])) {
     $id = (int)$_GET["boeking"];
     $date = strtotime($_POST["date"]);
     $pincode = $reservation->getPincode();
     $tripID = (int)$_POST["tripID"];
-    $customerID = $_SESSION["customerID"];
-    $statusID = $reservation->getStatusID();
+    $customerID = (int)$_POST["customerID"];
+    $statusID = (int)$_POST["statusID"];
 
     $reservation = Reservation::update($id, $date, $pincode, $tripID, $customerID, $statusID);
 
@@ -31,14 +27,14 @@ if (isset($_POST["edit"])) {
 
         <label>
             <header>Startdatum:</header>
-            <input type="date" name="date" value="<?= date("Y-m-d", $_SESSION["date"] ?? $reservation->getStartDate()) ?>" autofocus required />
+            <input type="date" name="date" value="<?= date("Y-m-d", $reservation->getStartDate()) ?>" autofocus required />
         </label>
 
         <label>
             <header>Status:</header>
             <select name="statusID">
                 <?php foreach (Status::getAll() as $id => $status) : ?>
-                    <?php if ($id === ($_SESSION["statusID"] ?? $reservation->getStatusID())) : ?>
+                    <?php if ($id === $reservation->getStatusID()) : ?>
                         <option value="<?= $id ?>" selected><?= htmlspecialchars($status->getStatus()) ?></option>
                     <?php else : ?>
                         <option value="<?= $id ?>"><?= htmlspecialchars($status->getStatus()) ?></option>
@@ -51,7 +47,7 @@ if (isset($_POST["edit"])) {
             <header>Tocht:</header>
             <select name="tripID">
                 <?php foreach (Trip::getAll() as $id => $trip) : ?>
-                    <?php if ($id === ($_SESSION["tripID"] ?? $reservation->getTripID())) : ?>
+                    <?php if ($id === $reservation->getTripID()) : ?>
                         <option value="<?= $id ?>" selected><?= htmlspecialchars($trip->getRoute()) ?></option>
                     <?php else : ?>
                         <option value="<?= $id ?>"><?= htmlspecialchars($trip->getRoute()) ?></option>
@@ -64,7 +60,7 @@ if (isset($_POST["edit"])) {
             <header>Klant:</header>
             <select name="customerID">
                 <?php foreach (Customer::getAll() as $id => $customer) : ?>
-                    <?php if ($id === ($_SESSION["edit-customerID"] ?? $reservation->getCustomerID())) : ?>
+                    <?php if ($id === $reservation->getCustomerID()) : ?>
                         <option value="<?= $id ?>" selected><?= htmlspecialchars($customer->getName()) ?></option>
                     <?php else : ?>
                         <option value="<?= $id ?>"><?= htmlspecialchars($customer->getName()) ?></option>
@@ -81,7 +77,5 @@ if (isset($_POST["edit"])) {
 <?php
 
 unset($_SESSION["error"]);
-unset($_SESSION["date"]);
-unset($_SESSION["tripID"]);
 
 ?>
