@@ -38,7 +38,6 @@ declare(strict_types=1);
             </select>
         </label>
 
-
         <footer>
             <a class="link" title="Wijzig deze boeking" href="<?= ROOT_DIR ?>management/boekingen/wijzigen?boeking=<?= $_GET["boeking"] ?>">Wijzigen</a>
             <a class="link" title="Verwijder deze boeking" href="<?= ROOT_DIR ?>management/boekingen/verwijderen?boeking=<?= $_GET["boeking"] ?>">Verwijderen</a>

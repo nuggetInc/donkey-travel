@@ -25,9 +25,28 @@ if (isset($_POST["delete"])) {
         </label>
 
         <label>
+            <header>Status:</header>
+            <select disabled>
+                <option><?= htmlspecialchars($reservation->getStatus()->getStatus()) ?></option>
+            </select>
+        </label>
+
+        <label>
+            <header>PIN code:</header>
+            <input type="text" value="<?= $reservation->getPincode() ?>" disabled />
+        </label>
+
+        <label>
             <header>Tocht:</header>
-            <select name="trip" disabled>
+            <select disabled>
                 <option><?= htmlspecialchars($reservation->getTrip()->getRoute()) ?></option>
+            </select>
+        </label>
+
+        <label>
+            <header>Klant:</header>
+            <select disabled>
+                <option><?= htmlspecialchars($reservation->getCustomer()->getName()) ?></option>
             </select>
         </label>
 

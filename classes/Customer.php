@@ -64,10 +64,10 @@ class Customer
 
         $customers = array();
 
-        if ($row = $sth->fetch())
+        while ($row = $sth->fetch())
             $customers[$row["id"]] = new Customer($row["id"], $row["name"], $row["email"], $row["phonenumber"], $row["password"]);
 
-        return $$customers;
+        return $customers;
     }
 
     public static function create(string $name, string $email, string $phonenumber, string $password)
@@ -130,6 +130,4 @@ class Customer
 
         return null;
     }
-
-
 }

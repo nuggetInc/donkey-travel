@@ -2,6 +2,10 @@
 
 declare(strict_types=1);
 
+echo "<pre>";
+print_r(Customer::getAll());
+echo "</pre>";
+
 if (isset($_POST["edit"])) {
     $id = (int)$_GET["boeking"];
     $date = strtotime($_POST["date"]);
@@ -31,6 +35,19 @@ if (isset($_POST["edit"])) {
         </label>
 
         <label>
+            <header>Status:</header>
+            <select name="statusID">
+                <?php foreach (Status::getAll() as $id => $status) : ?>
+                    <?php if ($id === ($_SESSION["statusID"] ?? $reservation->getStatusID())) : ?>
+                        <option value="<?= $id ?>" selected><?= htmlspecialchars($status->getStatus()) ?></option>
+                    <?php else : ?>
+                        <option value="<?= $id ?>"><?= htmlspecialchars($status->getStatus()) ?></option>
+                    <?php endif ?>
+                <?php endforeach ?>
+            </select>
+        </label>
+
+        <label>
             <header>Tocht:</header>
             <select name="tripID">
                 <?php foreach (Trip::getAll() as $id => $trip) : ?>
@@ -44,13 +61,13 @@ if (isset($_POST["edit"])) {
         </label>
 
         <label>
-            klant
-            <select name="customer">
+            <header>Klant:</header>
+            <select name="customerID">
                 <?php foreach (Customer::getAll() as $id => $customer) : ?>
-                    <?php if ($id === ($_SESSION["customerID"] ?? $customer->getCustomerID())) : ?>
-                        <option value="<?= $id ?>" selected><?= htmlspecialchars($customer->getCustomer()) ?></option>
+                    <?php if ($id === ($_SESSION["edit-customerID"] ?? $reservation->getCustomerID())) : ?>
+                        <option value="<?= $id ?>" selected><?= htmlspecialchars($customer->getName()) ?></option>
                     <?php else : ?>
-                        <option value="<?= $id ?>"><?= htmlspecialchars($customer->getCustomer()) ?></option>
+                        <option value="<?= $id ?>"><?= htmlspecialchars($customer->getName()) ?></option>
                     <?php endif ?>
                 <?php endforeach ?>
             </select>
