@@ -43,6 +43,19 @@ if (isset($_POST["edit"])) {
             </select>
         </label>
 
+        <label>
+            klant
+            <select name="customer">
+                <?php foreach (Customer::getAll() as $id => $customer) : ?>
+                    <?php if ($id === ($_SESSION["customerID"] ?? $customer->getCustomerID())) : ?>
+                        <option value="<?= $id ?>" selected><?= htmlspecialchars($customer->getCustomer()) ?></option>
+                    <?php else : ?>
+                        <option value="<?= $id ?>"><?= htmlspecialchars($customer->getCustomer()) ?></option>
+                    <?php endif ?>
+                <?php endforeach ?>
+            </select>
+        </label>
+
         <input type="submit" name="edit" value="Wijzigen" />
 
         <footer><a class="link" title="Annuleer wijzigingen" href="<?= ROOT_DIR ?>management/boekingen/bekijken?id=<?= $_GET["id"] ?>">Annuleren</a></footer>

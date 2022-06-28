@@ -57,6 +57,19 @@ class Customer
         return null;
     }
 
+    public static function getAll(): array
+    {
+        $sth = getPDO()->prepare("SELECT `id`, `name`, `email`, `phonenumber`, `password` FROM `customers`;");
+        $sth->execute();
+
+        $customers = array();
+
+        if ($row = $sth->fetch())
+            $customers[$row["id"]] = new Customer($row["id"], $row["name"], $row["email"], $row["phonenumber"], $row["password"]);
+
+        return $$customers;
+    }
+
     public static function create(string $name, string $email, string $phonenumber, string $password)
     {
         $params = array(
@@ -117,4 +130,6 @@ class Customer
 
         return null;
     }
+
+
 }
