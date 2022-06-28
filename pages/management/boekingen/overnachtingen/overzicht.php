@@ -5,8 +5,7 @@ declare(strict_types=1);
 $overnightStays = OvernightStay::getByReservation($reservation->getID());
 $inns = Inn::getAll();
 
-if (isset($_POST["add"]))
-{
+if (isset($_POST["add"])) {
     OvernightStay::create($reservation->getID(), (int)$_POST["innID"], 3);
 
     header("Location: " . ROOT_DIR . "management/boekingen/overnachtingen?boeking=" . $reservation->getID());
@@ -79,28 +78,31 @@ foreach ($overnightStays as $id => $overnightStay)
         </table>
     <?php endif ?>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Herberg</th>
-                <th>Adres</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($inns as $id => $inn) : ?>
+    <?php if (count($inns) > 0) : ?>
+        <table>
+            <thead>
                 <tr>
-                    <td><?= $inn->getName() ?></td>
-                    <td><?= $inn->getAddress() ?></td>
-                    <td>
-                        <form action="?boeking=<?= $reservation->getID() ?>" method="POST">
-                            <input type="hidden" name="innID" value="<?= $id ?>">
-                            <input class="link" title="Overnachting toevoegen" type="submit" name="add" value="+">
-                        </form>
-                    </td>
+                    <th>Herberg</th>
+                    <th>Adres</th>
+                    <th></th>
                 </tr>
-            <?php endforeach ?>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <?php foreach ($inns as $id => $inn) : ?>
+                    <tr>
+                        <td><?= $inn->getName() ?></td>
+                        <td><?= $inn->getAddress() ?></td>
+                        <td>
+                            <form action="?boeking=<?= $reservation->getID() ?>" method="POST">
+                                <input type="hidden" name="innID" value="<?= $id ?>">
+                                <input class="link" title="Overnachting toevoegen" type="submit" name="add" value="+">
+                            </form>
+                        </td>
+                    </tr>
+                <?php endforeach ?>
+            </tbody>
+        </table>
+    <?php endif ?>
+
     <a class="link" title="Ga terug naar boekingen" href="<?= ROOT_DIR ?>management/boekingen">Terug</a>
 </div>

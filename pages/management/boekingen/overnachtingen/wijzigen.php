@@ -20,6 +20,33 @@ $inn = Inn::get($overnightStay->getInnID());
             <p class="error"><?= $_SESSION["error"] ?></p>
         <?php endif ?>
 
+        <?php
+
+        $overnightStays = OvernightStay::getByReservation($reservation->getID());
+        $inns = Inn::getAll();
+
+        unset($overnightStays[$overnightStay->getID()]);
+
+        foreach ($overnightStays as $id => $temp)
+            unset($inns[$temp->getInnID()]);
+
+        ?>
+        <?php if (count($inns) > 0) : ?>
+            <label>
+                <header>Herberg:</header>
+                <select name="innID">
+
+                    <?php foreach ($inns as $id => $inn) : ?>
+                        <?php if ($id === $overnightStay->getInnID()) : ?>
+                            <option value="<?= $id ?>" selected><?= htmlspecialchars($inn->getName() . " - " . $inn->getAddress()) ?></option>
+                        <?php else : ?>
+                            <option value="<?= $id ?>"><?= htmlspecialchars($inn->getName() . " - " . $inn->getAddress()) ?></option>
+                        <?php endif ?>
+                    <?php endforeach ?>
+                </select>
+            </label>
+        <?php endif ?>
+
         <label>
             <header>Status:</header>
             <select name="statusID">

@@ -2,8 +2,7 @@
 
 declare(strict_types=1);
 
-if (isset($_POST["delete"]))
-{
+if (isset($_POST["delete"])) {
     OvernightStay::delete((int)$_GET["overnachting"]);
 
     header("Location: " . ROOT_DIR . "management/boekingen/overnachtingen?boeking=" . $_GET["boeking"]);
@@ -19,12 +18,7 @@ $inn = Inn::get($overnightStay->getInnID());
 
         <label>
             <header>Herberg:</header>
-            <input type="text" value="<?= htmlspecialchars($inn->getName()) ?>" disabled />
-        </label>
-
-        <label>
-            <header>Adres:</header>
-            <input type="text" value="<?= htmlspecialchars($inn->getAddress()) ?>" disabled />
+            <input type="text" value="<?= htmlspecialchars($inn->getName() . " - " . $inn->getAddress()) ?>" disabled />
         </label>
 
         <label>

@@ -5,8 +5,7 @@ declare(strict_types=1);
 $breakspots = Breakspot::getByReservation($reservation->getID());
 $restaurants = Restaurant::getAll();
 
-if (isset($_POST["add"]))
-{
+if (isset($_POST["add"])) {
     Breakspot::create($reservation->getID(), (int)$_POST["restaurantID"], 3);
 
     header("Location: " . ROOT_DIR . "management/boekingen/pauzeplaatsen?boeking=" . $reservation->getID());
@@ -79,28 +78,31 @@ foreach ($breakspots as $id => $breakspot)
         </table>
     <?php endif ?>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Restaurant</th>
-                <th>Adres</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($restaurants as $id => $restaurant) : ?>
+    <?php if (count($restaurants) > 0) : ?>
+        <table>
+            <thead>
                 <tr>
-                    <td><?= $restaurant->getName() ?></td>
-                    <td><?= $restaurant->getAddress() ?></td>
-                    <td>
-                        <form action="?boeking=<?= $reservation->getID() ?>" method="POST">
-                            <input type="hidden" name="restaurantID" value="<?= $id ?>">
-                            <input class="link" title="Pauzeplek toevoegen" type="submit" name="add" value="+">
-                        </form>
-                    </td>
+                    <th>Restaurant</th>
+                    <th>Adres</th>
+                    <th></th>
                 </tr>
-            <?php endforeach ?>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <?php foreach ($restaurants as $id => $restaurant) : ?>
+                    <tr>
+                        <td><?= $restaurant->getName() ?></td>
+                        <td><?= $restaurant->getAddress() ?></td>
+                        <td>
+                            <form action="?boeking=<?= $reservation->getID() ?>" method="POST">
+                                <input type="hidden" name="restaurantID" value="<?= $id ?>">
+                                <input class="link" title="Pauzeplek toevoegen" type="submit" name="add" value="+">
+                            </form>
+                        </td>
+                    </tr>
+                <?php endforeach ?>
+            </tbody>
+        </table>
+    <?php endif ?>
+
     <a class="link" title="Ga terug naar boekingen" href="<?= ROOT_DIR ?>management/boekingen">Terug</a>
 </div>

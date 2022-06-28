@@ -11,12 +11,7 @@ $inn = Inn::get($overnightStay->getInnID());
 
         <label>
             <header>Herberg:</header>
-            <input type="text" value="<?= htmlspecialchars($inn->getName()) ?>" disabled />
-        </label>
-
-        <label>
-            <header>Adres:</header>
-            <input type="text" value="<?= htmlspecialchars($inn->getAddress()) ?>" disabled />
+            <input type="text" value="<?= htmlspecialchars($inn->getName() . " - " . $inn->getAddress()) ?>" disabled />
         </label>
 
         <label>

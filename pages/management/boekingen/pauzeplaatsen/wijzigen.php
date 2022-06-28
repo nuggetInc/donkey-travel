@@ -3,7 +3,10 @@
 declare(strict_types=1);
 
 if (isset($_POST["edit"])) {
-    Breakspot::update($breakspot->getID(), $reservation->getID(), $breakspot->getRestaurantID(), (int)$_POST["statusID"]);
+    if (isset($_POST["restaurantID"]))
+        Breakspot::update($breakspot->getID(), $reservation->getID(), (int)$_POST["restaurantID"], (int)$_POST["statusID"]);
+    else
+        Breakspot::update($breakspot->getID(), $reservation->getID(), $breakspot->getRestaurantID(), (int)$_POST["statusID"]);
 
     header("Location: " . ROOT_DIR . "management/boekingen/pauzeplaatsen?boeking=" . $_GET["boeking"]);
     exit;
@@ -18,6 +21,33 @@ $restaurant = Restaurant::get($breakspot->getRestaurantID());
 
         <?php if (isset($_SESSION["error"])) : ?>
             <p class="error"><?= $_SESSION["error"] ?></p>
+        <?php endif ?>
+
+        <?php
+
+        $breakspots = Breakspot::getByReservation($reservation->getID());
+        $restaurants = Restaurant::getAll();
+
+        unset($breakspots[$breakspot->getID()]);
+
+        foreach ($breakspots as $id => $temp)
+            unset($restaurants[$temp->getRestaurantID()]);
+
+        ?>
+        <?php if (count($restaurants) > 0) : ?>
+            <label>
+                <header>Restaurant:</header>
+                <select name="restaurantID">
+
+                    <?php foreach ($restaurants as $id => $restaurant) : ?>
+                        <?php if ($id === $breakspot->getRestaurantID()) : ?>
+                            <option value="<?= $id ?>" selected><?= htmlspecialchars($restaurant->getName() . " - " . $restaurant->getAddress()) ?></option>
+                        <?php else : ?>
+                            <option value="<?= $id ?>"><?= htmlspecialchars($restaurant->getName() . " - " . $restaurant->getAddress()) ?></option>
+                        <?php endif ?>
+                    <?php endforeach ?>
+                </select>
+            </label>
         <?php endif ?>
 
         <label>
